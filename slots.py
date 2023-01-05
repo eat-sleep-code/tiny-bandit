@@ -2,8 +2,9 @@ import pygame
 import os
 import random
 
-imageTheme = 'classic'
-imageRoot = os.getcwd() + '/images/' + imageTheme
+gameTheme = 'classic'
+imageRoot = os.getcwd() + '/images/' + gameTheme
+audioRoot = os.getcwd() + '/audio/' + gameTheme
 screenX = 320  
 screenY = 480 
 reelOffsetX = 10
@@ -27,6 +28,10 @@ class Reels(object):
 		self.reel03Spinning = pygame.image.load(os.path.join(imageRoot, 'reel-03-spinning.jpg'))
 		self.reel03Y = reelOffsetY
 
+		self.audioSpinning = pygame.mixer.music.load(os.path.join(audioRoot, 'spinning.wav'))
+		self.audioPoints = pygame.mixer.music.load(os.path.join(audioRoot, 'points.wav'))
+		self.audioJackpot = pygame.mixer.music.load(os.path.join(audioRoot, 'jackpot.wav'))
+
 		
 	def handleInput(self):
 		key = pygame.key.get_pressed()
@@ -39,8 +44,9 @@ class Reels(object):
 
 	def draw(self, surface):
 		# Spinning...
-		print(self.reel01Y, self.reel02Y, self.reel03Y)
+		#print(self.reel01Y, self.reel02Y, self.reel03Y)
 		reelSpins = random.randrange(10, 20)
+		pygame.mixer.music.play(self.audioSpinning)
 		for i in range(0, reelSpins):
 			for y in reelSequence:
 				screen.fill((255,255,255))
@@ -61,6 +67,7 @@ class Reels(object):
 					surface.blit(self.reel03Spinning, (reelOffsetX + (reelWidth * 2), y * -1.2))
 				
 				pygame.draw.line(screen, (255, 255, 0, 0.5), (reelOffsetX, reelOffsetY + (screenY/2)), (reelOffsetX + (reelWidth * 3), reelOffsetY + (screenY/2)), 3)
+				pygame.mixer.music.fadeout(100)
 				pygame.display.update()
 				
 				
@@ -74,6 +81,7 @@ class Reels(object):
 
 
 pygame.init()
+pygame.mixer.init()
 pygame.display.set_caption('Tiny Bandit')
 clock = pygame.time.Clock()
 screen = pygame.display.set_mode((screenX, screenY))
