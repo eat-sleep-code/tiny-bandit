@@ -1,0 +1,204 @@
+{
+	"symbols": [
+		{
+			"name": "wild",
+			"positions": [
+				1900,
+				1600,
+				1800
+			],
+			"payout": 1000,
+			"freePlays": 3
+		},
+		{
+			"name": "cherry",
+			"positions": [
+				500,
+				1100,
+				2400
+			],
+			"payout": 100,
+			"freePlays": 1
+		},
+		{
+			"name": "lemon",
+			"positions": [
+				1800,
+				1700,
+				1900
+			],
+			"payout": 100,
+			"freePlays": 1
+		},
+		{
+			"name": "plum",
+			"positions": [
+				700,
+				500,
+				2200
+			],
+			"payout": 100,
+			"freePlays": 1
+		},
+		{
+			"name": "orange",
+			"positions": [
+				800,
+				800,
+				2100
+			],
+			"payout": 100,
+			"freePlays": 1
+		},
+		{
+			"name": "apple",
+			"positions": [
+				1000,
+				1400,
+				1700
+			],
+			"payout": 100,
+			"freePlays": 1
+		},
+		{
+			"name": "watermelon",
+			"positions": [
+				1100,
+				1500,
+				1600
+			],
+			"payout": 100,
+			"freePlays": 1
+		},
+		{
+			"name": "grape",
+			"positions": [
+				1300,
+				2000,
+				1400
+			],
+			"payout": 100,
+			"freePlays": 1
+		},
+		{
+			"name": "clover",
+			"positions": [
+				1500,
+				2400,
+				1200
+			],
+			"payout": 100,
+			"freePlays": 1
+		},
+		{
+			"name": "bar",
+			"positions": [
+				900,
+				700,
+				2000
+			],
+			"payout": 100,
+			"freePlays": 1
+		},
+		{
+			"name": "jewel",
+			"positions": [
+				2200,
+				2100,
+				700
+			],
+			"payout": 100,
+			"freePlays": 1
+		},
+		{
+			"name": "spade",
+			"positions": [
+				1700,
+				1800,
+				1000
+			],
+			"payout": 100,
+			"freePlays": 1
+		},
+		{
+			"name": "heart",
+			"positions": [
+				2300,
+				2200,
+				600
+			],
+			"payout": 100,
+			"freePlays": 1
+		},
+		{
+			"name": "club",
+			"positions": [
+				2100,
+				2300,
+				800
+			],
+			"payout": 100,
+			"freePlays": 1
+		},
+		{
+			"name": "diamond",
+			"positions": [
+				1400,
+				1000,
+				1500
+			],
+			"payout": 100,
+			"freePlays": 1
+		},
+		{
+			"name": "crown",
+			"positions": [
+				500,
+				1200,
+				2300
+			],
+			"payout": 100,
+			"freePlays": 1
+		},
+		{
+			"name": "horseshoe",
+			"positions": [
+				2400,
+				1300,
+				500
+			],
+			"payout": 100,
+			"freePlays": 1
+		},
+		{
+			"name": "bell",
+			"positions": [
+				1600,
+				900,
+				1100
+			],
+			"payout": 100,
+			"freePlays": 1
+		},
+		{
+			"name": "coin",
+			"positions": [
+				1200,
+				600,
+				1300
+			],
+			"payout": 100,
+			"freePlays": 1
+		},
+		{
+			"name": "star",
+			"positions": [
+				2000,
+				1900,
+				900
+			],
+			"payout": 100,
+			"freePlays": 1
+		}
+	]
+}
