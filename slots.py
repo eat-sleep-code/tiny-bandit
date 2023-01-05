@@ -5,13 +5,14 @@ import random
 gameTheme = 'classic'
 imageRoot = os.getcwd() + '/images/' + gameTheme
 audioRoot = os.getcwd() + '/audio/' + gameTheme
-screenX = 320  
-screenY = 480 
-reelOffsetX = 10
+screenX = 480 
+screenY = 800 
+reelOffsetX = 45
 reelOffsetY = 10
+reelGutter = 45
 reelCount = 3
 reelScoringOffset = -200 # Where is the payline relative to the top of the screen?
-reelWidth = (screenX - (reelOffsetX * 2)) / reelCount
+reelWidth = (screenX - (reelOffsetX * 2) - ((reelCount -1) * reelGutter)) / reelCount
 reelSequence = [500,600,700,800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800,1900,2000,2100,2200,2300,2400]
 
 class Reels(object):
@@ -46,30 +47,30 @@ class Reels(object):
 		# Spinning...
 		#print(self.reel01Y, self.reel02Y, self.reel03Y)
 		reelSpins = random.randrange(10, 20)
-		pygame.mixer.Sound.play(self.audioSpinning)
+		#pygame.mixer.Sound.play(self.audioSpinning)
 		for i in range(0, reelSpins):
 			for y in reelSequence:
 				screen.fill((255,255,255))
-
+				pygame.draw.line(screen, (255, 255, 0, 0.5), (10, reelOffsetY + (screenY/2)), (reelWidth + (reelOffsetY * 2), reelOffsetY + (screenY/2)), 3)
+				
 				if i == reelSpins - 1 and y >= self.reel01Y:
 					surface.blit(self.reel01, (reelOffsetX, self.reel01Y * -1))
 				else:
 					surface.blit(self.reel01Spinning, (reelOffsetX, y * -1))
 				
 				if i == reelSpins - 1 and y >= self.reel02Y:
-					surface.blit(self.reel02, (reelOffsetX + reelWidth, self.reel02Y * - 1))
+					surface.blit(self.reel02, (reelOffsetX + reelWidth + reelGutter, self.reel02Y * - 1))
 				else:
-					surface.blit(self.reel02Spinning, (reelOffsetX + reelWidth, y * -1.1))
+					surface.blit(self.reel02Spinning, (reelOffsetX + reelWidth + reelGutter, y * -1.1))
 				
 				if i == reelSpins - 1 and y >= self.reel03Y:
-					surface.blit(self.reel03, (reelOffsetX + (reelWidth * 2), self.reel03Y * -1))
+					surface.blit(self.reel03, (reelOffsetX + (reelWidth * 2) + (reelGutter * 2), self.reel03Y * -1))
 				else:
-					surface.blit(self.reel03Spinning, (reelOffsetX + (reelWidth * 2), y * -1.2))
+					surface.blit(self.reel03Spinning, (reelOffsetX + (reelWidth * 2) + (reelGutter * 2), y * -1.2))
 				
-				pygame.draw.line(screen, (255, 255, 0, 0.5), (reelOffsetX, reelOffsetY + (screenY/2)), (reelOffsetX + (reelWidth * 3), reelOffsetY + (screenY/2)), 3)
 				pygame.display.update()
 				
-		pygame.mixer.Sound.stop(self.audioSpinning)		
+		#pygame.mixer.Sound.stop(self.audioSpinning)		
 		
 		# Did we win anything?
 		if (self.reel01Y == 500 and self.reel02Y == 1100 and self.reel03Y == 2400):
