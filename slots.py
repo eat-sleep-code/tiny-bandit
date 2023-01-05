@@ -61,7 +61,7 @@ class Reels(object):
 				
 				
 		
-		# Did we win anything?
+		# Did we win anything?  Graphics need to be different between each reel, so specific win conditions will need to be configured here
 		if (self.reel01Y == self.reel02Y == self.reel03Y):
 			print('Jackpot!')
 		pygame.display.update()
