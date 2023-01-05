@@ -9,9 +9,9 @@ screenY = 480
 reelOffsetX = 10
 reelOffsetY = 10
 reelCount = 3
+reelScoringOffset = -200 # Where is the payline relative to the top of the screen?
 reelWidth = (screenX - (reelOffsetX * 2)) / reelCount
 reelSequence = [500,600,700,800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800,1900,2000,2100,2200,2300,2400]
-#reelSequence = [-10,-20,-40]
 
 class Reels(object):
 	def __init__(self):
@@ -31,7 +31,7 @@ class Reels(object):
 	def handleInput(self):
 		key = pygame.key.get_pressed()
 		if key[pygame.K_DOWN]:
-			self.reel01Y = random.choice(reelSequence)			
+			self.reel01Y = random.choice(reelSequence)		
 			self.reel02Y = random.choice(reelSequence)	
 			self.reel03Y = random.choice(reelSequence)	
 			reels.draw(screen)
@@ -60,6 +60,7 @@ class Reels(object):
 				else:
 					surface.blit(self.reel03Spinning, (reelOffsetX + (reelWidth * 2), y * -1.2))
 				
+				pygame.draw.line(screen, (255, 255, 0, 0.5), (reelOffsetX, reelOffsetY + (screenY/2)), (reelOffsetX + (reelWidth * 3), reelOffsetY + (screenY/2)), 3)
 				pygame.display.update()
 				
 				
@@ -73,6 +74,7 @@ class Reels(object):
 
 
 pygame.init()
+pygame.display.set_caption('Tiny Bandit')
 clock = pygame.time.Clock()
 screen = pygame.display.set_mode((screenX, screenY))
 reels = Reels()
