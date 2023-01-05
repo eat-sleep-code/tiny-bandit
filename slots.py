@@ -29,7 +29,6 @@ class Reels(object):
 	def handleInput(self):
 		key = pygame.key.get_pressed()
 		if key[pygame.K_DOWN]:
-			print('Trying...')
 			self.reel01Y = random.choice(reelSequence)			
 			self.reel02Y = random.choice(reelSequence)	
 			self.reel03Y = random.choice(reelSequence)	
