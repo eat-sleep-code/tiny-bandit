@@ -28,9 +28,9 @@ class Reels(object):
 		self.reel03Spinning = pygame.image.load(os.path.join(imageRoot, 'reel-03-spinning.jpg'))
 		self.reel03Y = reelOffsetY
 
-		self.audioSpinning = pygame.mixer.music.load(os.path.join(audioRoot, 'spinning.wav'))
-		self.audioPoints = pygame.mixer.music.load(os.path.join(audioRoot, 'points.wav'))
-		self.audioJackpot = pygame.mixer.music.load(os.path.join(audioRoot, 'jackpot.wav'))
+		self.audioSpinning = pygame.mixer.Sound(os.path.join(audioRoot, 'spinning.wav'))
+		self.audioPoints = pygame.mixer.Sound(os.path.join(audioRoot, 'points.wav'))
+		self.audioJackpot = pygame.mixer.Sound(os.path.join(audioRoot, 'jackpot.wav'))
 
 		
 	def handleInput(self):
@@ -46,7 +46,7 @@ class Reels(object):
 		# Spinning...
 		#print(self.reel01Y, self.reel02Y, self.reel03Y)
 		reelSpins = random.randrange(10, 20)
-		pygame.mixer.music.play(self.audioSpinning)
+		pygame.mixer.Sound.play(self.audioSpinning)
 		for i in range(0, reelSpins):
 			for y in reelSequence:
 				screen.fill((255,255,255))
@@ -67,10 +67,9 @@ class Reels(object):
 					surface.blit(self.reel03Spinning, (reelOffsetX + (reelWidth * 2), y * -1.2))
 				
 				pygame.draw.line(screen, (255, 255, 0, 0.5), (reelOffsetX, reelOffsetY + (screenY/2)), (reelOffsetX + (reelWidth * 3), reelOffsetY + (screenY/2)), 3)
-				pygame.mixer.music.fadeout(100)
 				pygame.display.update()
 				
-				
+		pygame.mixer.Sound.stop(self.audioSpinning)		
 		
 		# Did we win anything?
 		if (self.reel01Y == 500 and self.reel02Y == 1100 and self.reel03Y == 2400):
