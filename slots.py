@@ -2,14 +2,16 @@ import pygame
 import os
 import random
 
-imageRoot = os.getcwd() + '/images'
-screenX = 640
-screenY = 640
+imageTheme = 'classic'
+imageRoot = os.getcwd() + '/images/' + imageTheme
+screenX = 320  
+screenY = 480 
 reelOffsetX = 10
 reelOffsetY = 10
 reelCount = 3
 reelWidth = (screenX - (reelOffsetX * 2)) / reelCount
-reelSequence = [40,80,160,320,500]
+reelSequence = [500,600,700,800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800,1900,2000,2100,2200,2300,2400]
+#reelSequence = [-10,-20,-40]
 
 class Reels(object):
 	def __init__(self):
@@ -37,33 +39,35 @@ class Reels(object):
 
 	def draw(self, surface):
 		# Spinning...
+		print(self.reel01Y, self.reel02Y, self.reel03Y)
 		reelSpins = random.randrange(10, 20)
 		for i in range(0, reelSpins):
 			for y in reelSequence:
 				screen.fill((255,255,255))
 
-					
 				if i == reelSpins - 1 and y >= self.reel01Y:
-					surface.blit(self.reel01, (reelOffsetX, self.reel01Y))
+					surface.blit(self.reel01, (reelOffsetX, self.reel01Y * -1))
 				else:
-					surface.blit(self.reel01Spinning, (reelOffsetX, y))
+					surface.blit(self.reel01Spinning, (reelOffsetX, y * -1))
 				
 				if i == reelSpins - 1 and y >= self.reel02Y:
-					surface.blit(self.reel02, (reelOffsetX + reelWidth, self.reel02Y))
+					surface.blit(self.reel02, (reelOffsetX + reelWidth, self.reel02Y * - 1))
 				else:
-					surface.blit(self.reel02Spinning, (reelOffsetX + reelWidth, y * 1.1))
+					surface.blit(self.reel02Spinning, (reelOffsetX + reelWidth, y * -1.1))
 				
 				if i == reelSpins - 1 and y >= self.reel03Y:
-					surface.blit(self.reel03, (reelOffsetX + (reelWidth * 2), self.reel03Y))
+					surface.blit(self.reel03, (reelOffsetX + (reelWidth * 2), self.reel03Y * -1))
 				else:
-					surface.blit(self.reel03Spinning, (reelOffsetX + (reelWidth * 2), y * 1.2))
+					surface.blit(self.reel03Spinning, (reelOffsetX + (reelWidth * 2), y * -1.2))
+				
 				pygame.display.update()
 				
 				
 		
-		# Did we win anything?  Graphics need to be different between each reel, so specific win conditions will need to be configured here
-		if (self.reel01Y == self.reel02Y == self.reel03Y):
-			print('Jackpot!')
+		# Did we win anything?
+		if (self.reel01Y == 500 and self.reel02Y == 1100 and self.reel03Y == 2400):
+			print('Cherries')
+		
 		pygame.display.update()
 
 
