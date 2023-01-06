@@ -1,4 +1,4 @@
-#Tiny Bandit
+# Tiny Bandit
 
 Inspired by my prior [Tiny TV](https://github.com/eat-sleep-code/tiny-tv) project, we are back with Tiny Bandit.  Tiny Bandit is a miniaturized version of a casino gaming machine.   
 
