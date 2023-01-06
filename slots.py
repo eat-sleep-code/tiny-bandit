@@ -123,6 +123,15 @@ class Game(object):
 		
 		winnings = self.checkWinnings(reel01payline, reel02payline, reel03payline)
 		if (winnings[0] != "none"):
+			currentPayout = int(currentPayout) + int(winnings[1])
+			currentFreePlays = int(currentFreePlays) + int(winnings[2])
+			
+			# Update the screen...
+			surface.blit(self.mask, (0,0))
+			surface.blit(currentFreePlaysText, (freePlaysX, freePlaysY))
+			surface.blit(currentPayoutText, (payoutX, payoutY))
+			pygame.display.update()
+
 			if (winnings[0] == "wildPartial"):
 				# Wilds
 				pygame.mixer.Sound.play(self.audioPoints)
@@ -130,8 +139,7 @@ class Game(object):
 				# Jackpot
 				pygame.mixer.Sound.play(self.audioJackpot)
 
-			currentPayout = int(currentPayout) + int(winnings[1])
-			currentFreePlays = int(currentFreePlays) + int(winnings[2])
+			
 			for i in range(0, 20):
 				GPIO.output(27,GPIO.HIGH)
 				pygame.time.delay(100)
