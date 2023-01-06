@@ -168,7 +168,7 @@ class Game(object):
 		# Search for matches...
 		matches = jmespath.search("symbols[?" + matchExpression01 + "&&" + matchExpression02 + "&&" + matchExpression03 + "]", self.symbolMapping)
 		if matches or wildCount == 3:
-			print("Jackpot!", matches)
+			print("Jackpot!", matches[0])
 			winningMatch = json.loads(json.dumps(matches[0]))
 			return winningMatch["name"], winningMatch["payout"], winningMatch["freePlays"]
 		elif wildCount > 0: 
