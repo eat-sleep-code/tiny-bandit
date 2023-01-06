@@ -125,7 +125,7 @@ class Game(object):
 		if (winnings[0] != "none"):
 			currentPayout = int(currentPayout) + int(winnings[1])
 			currentFreePlays = int(currentFreePlays) + int(winnings[2])
-			
+
 			# Update the screen...
 			surface.blit(self.mask, (0,0))
 			surface.blit(currentFreePlaysText, (freePlaysX, freePlaysY))
@@ -175,7 +175,7 @@ class Game(object):
 
 		# Search for matches...
 		matches = jmespath.search("symbols[?" + matchExpression01 + "&&" + matchExpression02 + "&&" + matchExpression03 + "]", self.symbolMapping)
-		if matches or wildCount == 3:
+		if matches and (wildCount == 0 or wildCount == 3):
 			print("Jackpot!", matches[0])
 			winningMatch = json.loads(json.dumps(matches[0]))
 			return winningMatch["name"], winningMatch["payout"], winningMatch["freePlays"]
