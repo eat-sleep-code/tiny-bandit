@@ -57,7 +57,7 @@ class Slots(object):
 	def spin(self, surface):
 		# Spinning...
 		reelSpins = random.randrange(7, 15)
-		#pygame.mixer.Sound.play(self.audioSpinning)
+		pygame.mixer.Sound.play(self.audioSpinning)
 		for i in range(0, reelSpins):
 			for y in reelSequence:
 				screen.fill((255,255,255))
@@ -80,7 +80,7 @@ class Slots(object):
 				surface.blit(self.mask, (0,0))
 				pygame.display.update()
 				
-		#pygame.mixer.Sound.stop(self.audioSpinning)		
+		pygame.mixer.Sound.stop(self.audioSpinning)		
 		
 		reel01payline = self.reel01Y + reelScoringOffset
 		reel02payline = self.reel02Y + reelScoringOffset
@@ -88,28 +88,49 @@ class Slots(object):
 		#print(reel01payline, reel02payline, reel03payline)
 		
 		winnings = slots.checkWinnings(reel01payline, reel02payline, reel03payline)
-		
+		if (winnings[0] != "none"):
+			pygame.mixer.Sound.play(self.audioJackpot)
+
+
 		pygame.display.update()
 
 
 
 	def checkWinnings(self, reel01, reel02, reel03):
-		# Did we win anything?
-		#TODO: Get wild positions
-		wild = jmespath.search("symbols['wild'].positions", self.symbolMapping);
-		print(wild)
-		#TODO: Did we get 3 wilds, post winnings...
-		#TODO: Did we get any wilds?
-		#TODO: Find if there are any matches to non-wild symbols
 		
-		return 10, 10
+		# Get the wild positions...
+		wild = jmespath.search("symbols[?name == 'wild'].positions | [0]", self.symbolMapping);
 		
+		# Check each reel for a non-wild symbol, if exists adjust match expressions 
+		matchExpression01 = "(positions[0] >= `0`)"
+		if (reel01 != wild[0]):
+			matchExpression01 = "(positions[0] == `" + str(reel01) + "`) "
+
+		matchExpression02 = "(positions[1] >= `0`)"
+		if (reel02 != wild[1]):
+			matchExpression02 = "(positions[1] == `" + str(reel02) + "`) "
+
+		matchExpression03 = "(positions[2] >= `0`)"
+		if (reel03 != wild[2]):
+			matchExpression03 = "(positions[2] == `" + str(reel03) + "`) "
+
+		# Search for matches...
+		matches = jmespath.search("symbols[?" + matchExpression01 + "&&" + matchExpression02 + "&&" + matchExpression03 + "]", self.symbolMapping)
+		if matches:
+			print("You win!", matches)
+			winningMatch = json.loads(json.dumps(matches[0]))
+			return winningMatch["name"], winningMatch["payout"], winningMatch["freePlays"]
+		else:
+			print("You lose", matches)
+			return "none", 0, 0	
+	
 
 
 
 pygame.init()
 pygame.mixer.init()
 pygame.display.set_caption('Tiny Bandit')
+pygame.display.set_icon(pygame.image.load(os.path.join(imageRoot, 'icon.png')))
 clock = pygame.time.Clock()
 screen = pygame.display.set_mode((screenX, screenY))
 slots = Slots()
