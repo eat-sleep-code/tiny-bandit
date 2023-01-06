@@ -1,6 +1,6 @@
 #Tiny Bandit
 
-Inspired by my prior [Tiny TV[(https://github.com/eat-sleep-code/tiny-tv) project, we are back with Tiny Bandit.  Tiny Bandit is a miniaturized version of a casino gaming machine.   
+Inspired by my prior [Tiny TV](https://github.com/eat-sleep-code/tiny-tv) project, we are back with Tiny Bandit.  Tiny Bandit is a miniaturized version of a casino gaming machine.   
 
 The initial game under development is Slots.  However Tiny Bandit is designed to host multiple games in the future.   
 
