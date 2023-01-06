@@ -1,8 +1,15 @@
-import pygame
-import os
-import json
 import jmespath
+import json
+import os
+import pygame
 import random
+import RPi.GPIO as GPIO
+import time
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+GPIO.setup(10, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) #BUTTON
+GPIO.setup(27, GPIO.OUT) #LED
 
 gameTheme = 'classic'
 appRoot = os.getcwd()
@@ -45,6 +52,13 @@ class Slots(object):
 
 		
 	def handleSpins(self):
+		buttonState = GPIO.input(10)
+		if buttonState == GPIO.HIGH:
+			self.reel01Y = random.choice(reelSequence)		
+			self.reel02Y = random.choice(reelSequence)	
+			self.reel03Y = random.choice(reelSequence)	
+			slots.spin(screen)
+			
 		key = pygame.key.get_pressed()
 		if key[pygame.K_DOWN]:
 			self.reel01Y = random.choice(reelSequence)		
@@ -57,7 +71,7 @@ class Slots(object):
 	def spin(self, surface):
 		# Spinning...
 		reelSpins = random.randrange(7, 15)
-		pygame.mixer.Sound.play(self.audioSpinning)
+		pygame.mixer.Sound.play(self.audioSpinning, 10)
 		for i in range(0, reelSpins):
 			for y in reelSequence:
 				screen.fill((255,255,255))
@@ -90,7 +104,10 @@ class Slots(object):
 		winnings = slots.checkWinnings(reel01payline, reel02payline, reel03payline)
 		if (winnings[0] != "none"):
 			pygame.mixer.Sound.play(self.audioJackpot)
-
+			for i in range(0, 20):
+				GPIO.output(27,GPIO.HIGH)
+				pygame.time.delay(100)
+				GPIO.output(27,GPIO.LOW)
 
 		pygame.display.update()
 
