@@ -4,30 +4,22 @@ import os
 import pygame
 import random
 import RPi.GPIO as GPIO
-import time
 
-GPIO.setmode(GPIO.BCM)
-GPIO.setwarnings(False)
-GPIO.setup(10, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) #BUTTON
-GPIO.setup(27, GPIO.OUT) #LED
 
 gameTheme = 'classic'
-appRoot = os.getcwd()
-imageRoot = appRoot + '/images/' + gameTheme
-audioRoot = appRoot + '/audio/' + gameTheme
-screenX = 480 
-screenY = 800 
+appRoot = os.getcwd() + '/slots/'
+imageRoot = appRoot + 'images/' + gameTheme
+audioRoot = appRoot + 'audio/' + gameTheme
 reelOffsetX = 45
 reelOffsetY = 10
 reelGutter = 45
 reelCount = 3
 reelScoringOffset = 400 # Where is the payline relative to the top of the screen?
-reelWidth = (screenX - (reelOffsetX * 2) - ((reelCount -1) * reelGutter)) / reelCount
 reelSequence = [500,600,700,800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800,1900,2000,2100,2200,2300,2400]
 
 
 
-class Slots(object):
+class Game(object):
 	def __init__(self):
 		self.mask = pygame.image.load(os.path.join(imageRoot, 'mask.png'))
 
@@ -51,30 +43,32 @@ class Slots(object):
 
 
 		
-	def handleSpins(self):
+	def playSlots(self, screen, screenX, screenY, clock):
 		buttonState = GPIO.input(10)
 		if buttonState == GPIO.HIGH:
 			self.reel01Y = random.choice(reelSequence)		
 			self.reel02Y = random.choice(reelSequence)	
 			self.reel03Y = random.choice(reelSequence)	
-			slots.spin(screen)
+			self.spin(screen, screenX, screenY)
 			
 		key = pygame.key.get_pressed()
 		if key[pygame.K_DOWN]:
 			self.reel01Y = random.choice(reelSequence)		
 			self.reel02Y = random.choice(reelSequence)	
 			self.reel03Y = random.choice(reelSequence)	
-			slots.spin(screen)
+			self.spin(screen, screenX, screenY)
 			
 
 
-	def spin(self, surface):
+	def spin(self, surface, screenX, screenY):
+		reelWidth = (screenX - (reelOffsetX * 2) - ((reelCount -1) * reelGutter)) / reelCount
+
 		# Spinning...
 		reelSpins = random.randrange(7, 15)
 		pygame.mixer.Sound.play(self.audioSpinning, 10)
 		for i in range(0, reelSpins):
 			for y in reelSequence:
-				screen.fill((255,255,255))
+				surface.fill((255,255,255))
 				
 				if i == reelSpins - 1 and y >= self.reel01Y:
 					surface.blit(self.reel01, (reelOffsetX, self.reel01Y * -1))
@@ -101,7 +95,7 @@ class Slots(object):
 		reel03payline = self.reel03Y + reelScoringOffset
 		#print(reel01payline, reel02payline, reel03payline)
 		
-		winnings = slots.checkWinnings(reel01payline, reel02payline, reel03payline)
+		winnings = self.checkWinnings(reel01payline, reel02payline, reel03payline)
 		if (winnings[0] != "none"):
 			pygame.mixer.Sound.play(self.audioJackpot)
 			for i in range(0, 20):
@@ -144,20 +138,3 @@ class Slots(object):
 
 
 
-pygame.init()
-pygame.mixer.init()
-pygame.display.set_caption('Tiny Bandit')
-pygame.display.set_icon(pygame.image.load(os.path.join(imageRoot, 'icon.png')))
-clock = pygame.time.Clock()
-screen = pygame.display.set_mode((screenX, screenY))
-slots = Slots()
-
-running = True
-while running:
-	event = pygame.event.poll()
-	for event in pygame.event.get():
-		if event.type == pygame.QUIT:
-			running = False
-
-		slots.handleSpins()
-		clock.tick(30)
