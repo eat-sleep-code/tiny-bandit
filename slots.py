@@ -49,6 +49,9 @@ class Game(object):
 		self.reel03Spinning = pygame.image.load(os.path.join(imageRoot, 'reel-03-spinning.jpg'))
 		self.reel03Y = reelOffsetY
 
+		self.winningsJackpot = pygame.image.load(os.path.join(imageRoot, 'jackpot.png'))
+		self.winningsWild = pygame.image.load(os.path.join(imageRoot, 'wild.png'))
+
 		self.audioSpinning = pygame.mixer.Sound(os.path.join(audioRoot, 'spinning.wav'))
 		self.audioPoints = pygame.mixer.Sound(os.path.join(audioRoot, 'points.wav'))
 		self.audioJackpot = pygame.mixer.Sound(os.path.join(audioRoot, 'jackpot.wav'))
@@ -133,15 +136,17 @@ class Game(object):
 			surface.blit(self.mask, (0,0))
 			surface.blit(currentFreePlaysText, (freePlaysX, freePlaysY))
 			surface.blit(currentPayoutText, (payoutX, payoutY))
-			pygame.display.update()
-	
+			
 			if (winnings[0] == "wildPartial"):
 				# Wilds
+				surface.blit(self.winningsWild, (0,0))
 				pygame.mixer.Sound.play(self.audioPoints)
 			else:
 				# Jackpot
+				surface.blit(self.winningsJackpot, (0,0))
 				pygame.mixer.Sound.play(self.audioJackpot)
 
+			pygame.display.update()
 			
 			for i in range(0, 20):
 				GPIO.output(27,GPIO.HIGH)

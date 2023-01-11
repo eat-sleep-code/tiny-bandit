@@ -38,9 +38,9 @@ Add the following line to the end of the file and then save the file:
 
 - [X] Display current coins (and freeplays?)
 - [X] Add or deduct coins (and freeplays?)
-- [ ] Add jackpot animation 
-- [ ] Add wild animation 
-- [ ] Add actual mask
+- [X] Add jackpot image 
+- [X] Add wild image 
+- [X] Add actual mask
 - [ ] Add splash screen / menu
 - [X] Write install script
 - [ ] Build physical Tiny Bandit machine and document the process
