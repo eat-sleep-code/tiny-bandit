@@ -4,6 +4,7 @@ Inspired by my prior [Tiny TV](https://github.com/eat-sleep-code/tiny-tv) projec
 
 The initial game under development is Slots.  However Tiny Bandit is designed to host multiple games in the future.   
 
+---
 
 ## Installation
 
@@ -14,8 +15,24 @@ wget -q https://raw.githubusercontent.com/eat-sleep-code/tiny-bandit/main/instal
 sudo chmod +x ~/install-tiny-bandit.sh && ~/install-tiny-bandit.sh
 ```
 
+---
+
+
+## Autostart at Desktop Login
+
+To autostart the program as soon as the Raspberry Pi OS desktop starts, execute the following command:
+
+```
+sudo nano /etc/xdg/lxsession/LXDE-pi/autostart
 ```
 
+Add the following line to the end of the file and then save the file:
+
+```
+@lxterminal --geometry=1x1 -e sudo python3 /home/pi/tiny-bandit/tiny-bandit.py
+```
+
+---
 
 ## To-Do List:
 
