@@ -67,6 +67,7 @@ class Game(object):
 			
 		key = pygame.key.get_pressed()
 		if key[pygame.K_DOWN]:
+			print('Key pressed...')
 			self.reel01Y = random.choice(reelSequence)		
 			self.reel02Y = random.choice(reelSequence)	
 			self.reel03Y = random.choice(reelSequence)	
@@ -127,11 +128,13 @@ class Game(object):
 			currentFreePlays = int(currentFreePlays) + int(winnings[2])
 
 			# Update the screen...
+			currentFreePlaysText = self.font.render(str(currentFreePlays), True, (255, 255, 255))
+			currentPayoutText = self.font.render(str(currentPayout), True, (255, 255, 255))
 			surface.blit(self.mask, (0,0))
 			surface.blit(currentFreePlaysText, (freePlaysX, freePlaysY))
 			surface.blit(currentPayoutText, (payoutX, payoutY))
 			pygame.display.update()
-
+	
 			if (winnings[0] == "wildPartial"):
 				# Wilds
 				pygame.mixer.Sound.play(self.audioPoints)
@@ -183,7 +186,7 @@ class Game(object):
 			print("You got " + str(wildCount) + " wild slots!")
 			return "wildPartial", wildPayout * wildCount, wildFreePlays * wildCount 
 		else:
-			print("You got nothin'", matches)
+			#print("You got nothin'", matches)
 			return "none", 0, 0	
 	
 
