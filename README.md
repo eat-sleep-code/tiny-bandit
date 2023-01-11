@@ -5,10 +5,15 @@ Inspired by my prior [Tiny TV](https://github.com/eat-sleep-code/tiny-tv) projec
 The initial game under development is Slots.  However Tiny Bandit is designed to host multiple games in the future.   
 
 
-## Prerequisites
+## Installation
+
+Installation of the program, any software prerequisites, as well as the display driver can be completed with the following two-line install script.
 
 ```
-sudo pip3 install jmespath Rpi.GPIO
+wget -q https://raw.githubusercontent.com/eat-sleep-code/tiny-bandit/main/install-tiny-bandit.sh -O ~/install-tiny-bandit.sh
+sudo chmod +x ~/install-tiny-bandit.sh && ~/install-tiny-bandit.sh
+```
+
 ```
 
 
