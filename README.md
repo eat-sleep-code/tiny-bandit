@@ -36,10 +36,12 @@ Add the following line to the end of the file and then save the file:
 
 ## To-Do List:
 
-- [ ] Display current coins (and freeplays?)
-- [ ] Add or deduct coins (and freeplays?)
+- [X] Display current coins (and freeplays?)
+- [X] Add or deduct coins (and freeplays?)
 - [ ] Add jackpot animation 
+- [ ] Add wild animation 
+- [ ] Add actual mask
 - [ ] Add splash screen / menu
-- [ ] Write install script
+- [X] Write install script
 - [ ] Build physical Tiny Bandit machine and document the process
 - [ ] Add web service integration to allow date-specific promotions and possible Leaderboard
