@@ -1,3 +1,4 @@
+import globals
 import os
 import pygame
 import random
@@ -35,44 +36,44 @@ class Game(object):
 
 
 
-	def playFlappy(self, screen, screenX, screenY, clock):
-		horizontal = int(screenX/5)
-		vertical = int(screenX/2)
-		elevation = screenY * 0.8
+	def playFlappy(self):
+		horizontal = int(globals.screenWidth/5)
+		vertical = int(globals.screenWidth/2)
+		elevation = globals.screenHeight * 0.8
 		ground = 0
 	
 		key = pygame.key.get_pressed()
 		if key[pygame.K_UP] or key[pygame.K_DOWN]:
 			print('Key pressed...')
-			horizontal = int(screenX/5)
-			vertical = int((screenY - self.gameImages['bird'].get_height())/2)
+			horizontal = int(globals.screenWidth/5)
+			vertical = int((globals.screenHeight - self.gameImages['bird'].get_height())/2)
 			ground = 0
-			self.flap(screen, screenX, screenY, clock, horizontal, vertical, ground, elevation)
+			self.flap(horizontal, vertical, ground, elevation)
 
 		else:
-			screen.blit(self.gameImages['background'], (0, 0))
-			screen.blit(self.gameImages['bird'], (horizontal, vertical))
-			screen.blit(self.gameImages['base'], (ground, elevation))
+			globals.displaySurface.blit(self.gameImages['background'], (0, 0))
+			globals.displaySurface.blit(self.gameImages['bird'], (horizontal, vertical))
+			globals.displaySurface.blit(self.gameImages['base'], (ground, elevation))
 			pygame.display.update()
-			clock.tick(self.fps)
+			globals.clock.tick(self.fps)
 
 
 
-	def flap(self, surface, screenX, screenY, clock, horizontal, vertical, ground, elevation):
+	def flap(self, horizontal, vertical, ground, elevation):
 		currentScore = 0
 		currentHeight = 100
 
-		firstPipe = self.createPipe(screenX, screenY, self.gameImages)
-		secondPipe = self.createPipe(screenX, screenY, self.gameImages)
+		firstPipe = self.createPipe(globals.screenWidth, globals.screenHeight, self.gameImages)
+		secondPipe = self.createPipe(globals.screenWidth, globals.screenHeight, self.gameImages)
 
 		downPipes = [
-			{'x': screenX + 300 - currentHeight, 'y': firstPipe[1]['y']},
-			{'x': screenX + 300 - currentHeight + (screenX/2), 'y': secondPipe[1]['y']},
+			{'x': globals.screenWidth + 300 - currentHeight, 'y': firstPipe[1]['y']},
+			{'x': globals.screenWidth + 300 - currentHeight + (globals.screenWidth/2), 'y': secondPipe[1]['y']},
 		]
 
 		upPipes = [
-			{'x': screenX + 300 - currentHeight, 'y': firstPipe[0]['y']},
-			{'x': screenX + 300 - currentHeight + (screenX/2), 'y': secondPipe[0]['y']},
+			{'x': globals.screenWidth + 300 - currentHeight, 'y': firstPipe[0]['y']},
+			{'x': globals.screenWidth + 300 - currentHeight + (globals.screenWidth/2), 'y': secondPipe[0]['y']},
 		]
 
 		# Velocity
@@ -122,7 +123,7 @@ class Game(object):
 
 			# Add a new pipe...
 			if 0 < upPipes[0]['x'] < 5:
-				newpipe = self.createPipe(screenX, screenY, self.gameImages)
+				newpipe = self.createPipe(self.gameImages)
 				upPipes.append(newpipe[0])
 				downPipes.append(newpipe[1])
 
@@ -131,14 +132,14 @@ class Game(object):
 				upPipes.pop(0)
 				downPipes.pop(0)
 
-			# Update screen...
-			surface.blit(self.gameImages['background'], (0, 0))
+			# Update globals.displaySurface...
+			globals.displaySurface.blit(self.gameImages['background'], (0, 0))
 			for upperPipe, lowerPipe in zip(upPipes, downPipes):
-				surface.blit(self.gameImages['pipe'][0], (upperPipe['x'], upperPipe['y']))
-				surface.blit(self.gameImages['pipe'][1], (lowerPipe['x'], lowerPipe['y']))
+				globals.displaySurface.blit(self.gameImages['pipe'][0], (upperPipe['x'], upperPipe['y']))
+				globals.displaySurface.blit(self.gameImages['pipe'][1], (lowerPipe['x'], lowerPipe['y']))
 
-			surface.blit(self.gameImages['base'], (ground, elevation))
-			surface.blit(self.gameImages['bird'], (horizontal, vertical))
+			globals.displaySurface.blit(self.gameImages['base'], (ground, elevation))
+			globals.displaySurface.blit(self.gameImages['bird'], (horizontal, vertical))
 
 
 
@@ -148,14 +149,14 @@ class Game(object):
 			
 			for num in numbers:
 				width += self.gameImages['scoreimages'][num].get_width()
-			offsetX = (screenX - width)/1.1
+			offsetX = (globals.screenWidth - width)/1.1
 
 			for num in numbers:
-				surface.blit(self.gameImages['scoreimages'][num], (offsetX, screenX*0.02))
+				globals.displaySurface.blit(self.gameImages['scoreimages'][num], (offsetX, globals.screenWidth*0.02))
 				offsetX += self.gameImages['scoreimages'][num].get_width()
 
 			pygame.display.update()
-			clock.tick(self.fps)
+			globals.clock.tick(self.fps)
 
 
 	def isGameOver(self, gameImages, elevation, horizontal, vertical, upPipes, downPipes):
@@ -173,11 +174,11 @@ class Game(object):
 		return False
 
 
-	def createPipe(self, screenX, screenY, gameImages):
-		offset = screenY/3
+	def createPipe(self, gameImages):
+		offset = globals.screenHeight/3
 		pipeHeight = gameImages['pipe'][0].get_height()
-		y2 = offset + random.randrange(0, int(screenY - gameImages['base'].get_height() - 1.2 * offset))
-		pipeX = screenX + 10
+		y2 = offset + random.randrange(0, int(globals.screenHeight - gameImages['base'].get_height() - 1.2 * offset))
+		pipeX = globals.screenWidth + 10
 		y1 = pipeHeight - y2 + offset
 		pipe = [
 			{'x': pipeX, 'y': -y1},

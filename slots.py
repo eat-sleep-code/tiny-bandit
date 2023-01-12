@@ -1,3 +1,4 @@
+import globals
 import jmespath
 import json
 import os
@@ -60,13 +61,13 @@ class Game(object):
 
 
 		
-	def playSlots(self, screen, screenX, screenY, clock):
+	def playSlots(self):
 		buttonState = GPIO.input(10)
 		if buttonState == GPIO.HIGH:
 			self.reel01Y = random.choice(reelSequence)		
 			self.reel02Y = random.choice(reelSequence)	
 			self.reel03Y = random.choice(reelSequence)	
-			self.spin(screen, screenX, screenY)
+			self.spin()
 			
 		key = pygame.key.get_pressed()
 		if key[pygame.K_UP] or key[pygame.K_DOWN]:
@@ -74,14 +75,14 @@ class Game(object):
 			self.reel01Y = random.choice(reelSequence)		
 			self.reel02Y = random.choice(reelSequence)	
 			self.reel03Y = random.choice(reelSequence)	
-			self.spin(screen, screenX, screenY)
+			self.spin()
 			
 
 
-	def spin(self, surface, screenX, screenY):
+	def spin(self):
 		global currentFreePlays
 		global currentPayout
-		reelWidth = (screenX - (reelOffsetX * 2) - ((reelCount -1) * reelGutter)) / reelCount
+		reelWidth = (globals.screenWidth - (reelOffsetX * 2) - ((reelCount -1) * reelGutter)) / reelCount
 
 		# Spinning...
 		if currentFreePlays > 0:
@@ -96,26 +97,26 @@ class Game(object):
 		pygame.mixer.Sound.play(self.audioSpinning, 10)
 		for i in range(0, reelSpins):
 			for y in reelSequence:
-				surface.fill((255,255,255))
+				globals.displaySurface.fill((255,255,255))
 				
 				if i == reelSpins - 1 and y >= self.reel01Y:
-					surface.blit(self.reel01, (reelOffsetX, self.reel01Y * -1))
+					globals.displaySurface.blit(self.reel01, (reelOffsetX, self.reel01Y * -1))
 				else:
-					surface.blit(self.reel01Spinning, (reelOffsetX, y * -1))
+					globals.displaySurface.blit(self.reel01Spinning, (reelOffsetX, y * -1))
 				
 				if i == reelSpins - 1 and y >= self.reel02Y:
-					surface.blit(self.reel02, (reelOffsetX + reelWidth + reelGutter, self.reel02Y * - 1))
+					globals.displaySurface.blit(self.reel02, (reelOffsetX + reelWidth + reelGutter, self.reel02Y * - 1))
 				else:
-					surface.blit(self.reel02Spinning, (reelOffsetX + reelWidth + reelGutter, y * -1.1))
+					globals.displaySurface.blit(self.reel02Spinning, (reelOffsetX + reelWidth + reelGutter, y * -1.1))
 				
 				if i == reelSpins - 1 and y >= self.reel03Y:
-					surface.blit(self.reel03, (reelOffsetX + (reelWidth * 2) + (reelGutter * 2), self.reel03Y * -1))
+					globals.displaySurface.blit(self.reel03, (reelOffsetX + (reelWidth * 2) + (reelGutter * 2), self.reel03Y * -1))
 				else:
-					surface.blit(self.reel03Spinning, (reelOffsetX + (reelWidth * 2) + (reelGutter * 2), y * -1.2))
+					globals.displaySurface.blit(self.reel03Spinning, (reelOffsetX + (reelWidth * 2) + (reelGutter * 2), y * -1.2))
 				
-				surface.blit(self.mask, (0,0))
-				surface.blit(currentFreePlaysText, (freePlaysX, freePlaysY))
-				surface.blit(currentPayoutText, (payoutX, payoutY))
+				globals.displaySurface.blit(self.mask, (0,0))
+				globals.displaySurface.blit(currentFreePlaysText, (freePlaysX, freePlaysY))
+				globals.displaySurface.blit(currentPayoutText, (payoutX, payoutY))
 				pygame.display.update()
 				
 		pygame.mixer.Sound.stop(self.audioSpinning)		
@@ -133,17 +134,17 @@ class Game(object):
 			# Update the screen...
 			currentFreePlaysText = self.font.render(str(currentFreePlays), True, (255, 255, 255))
 			currentPayoutText = self.font.render(str(currentPayout), True, (255, 255, 255))
-			surface.blit(self.mask, (0,0))
-			surface.blit(currentFreePlaysText, (freePlaysX, freePlaysY))
-			surface.blit(currentPayoutText, (payoutX, payoutY))
+			globals.displaySurface.blit(self.mask, (0,0))
+			globals.displaySurface.blit(currentFreePlaysText, (freePlaysX, freePlaysY))
+			globals.displaySurface.blit(currentPayoutText, (payoutX, payoutY))
 			
 			if (winnings[0] == "wildPartial"):
 				# Wilds
-				surface.blit(self.winningsWild, (0,0))
+				globals.displaySurface.blit(self.winningsWild, (0,0))
 				pygame.mixer.Sound.play(self.audioPoints)
 			else:
 				# Jackpot
-				surface.blit(self.winningsJackpot, (0,0))
+				globals.displaySurface.blit(self.winningsJackpot, (0,0))
 				pygame.mixer.Sound.play(self.audioJackpot)
 
 			pygame.display.update()
@@ -193,7 +194,3 @@ class Game(object):
 		else:
 			#print("You got nothin'", matches)
 			return "none", 0, 0	
-	
-
-
-
