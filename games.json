@@ -1,0 +1,14 @@
+{
+	"games": [
+        {
+            "id": "slots", 
+            "title": "Slots",
+            "icon": "slots/images/classic/icon.png"
+        },
+        {
+            "id": "flappy", 
+            "title": "Flappy Bird",
+            "icon": "flappy/images/icon.png"
+        }
+    ]
+}

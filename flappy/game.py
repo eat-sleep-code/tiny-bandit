@@ -1,10 +1,11 @@
-import globals
 import os
-import pygame
 import random
 import sys
+
+import pygame
 from pygame.locals import *
 
+import globals
 
 # File paths
 appRoot = os.getcwd() + '/flappy/'
@@ -14,6 +15,9 @@ audioRoot = appRoot + 'audio/'
 
 class Game(object):
 	def __init__(self):
+		pygame.display.set_caption('Flappy Bird')
+		pygame.display.set_icon(pygame.image.load(os.path.join(imageRoot, 'icon.png')).convert_alpha())
+
 		self.fps = 32
 		
 		self.gameImages = {}
@@ -41,10 +45,12 @@ class Game(object):
 		vertical = int(globals.screenWidth/2)
 		elevation = globals.screenHeight * 0.8
 		ground = 0
-	
+
+		if globals.gameJustLaunched == True:
+			globals.gameJustLaunched = False
+
 		key = pygame.key.get_pressed()
 		if key[pygame.K_UP] or key[pygame.K_DOWN]:
-			print('Key pressed...')
 			horizontal = int(globals.screenWidth/5)
 			vertical = int((globals.screenHeight - self.gameImages['bird'].get_height())/2)
 			ground = 0
@@ -63,8 +69,8 @@ class Game(object):
 		currentScore = 0
 		currentHeight = 100
 
-		firstPipe = self.createPipe(globals.screenWidth, globals.screenHeight, self.gameImages)
-		secondPipe = self.createPipe(globals.screenWidth, globals.screenHeight, self.gameImages)
+		firstPipe = self.createPipe(self.gameImages)
+		secondPipe = self.createPipe(self.gameImages)
 
 		downPipes = [
 			{'x': globals.screenWidth + 300 - currentHeight, 'y': firstPipe[1]['y']},
@@ -87,14 +93,12 @@ class Game(object):
 
 
 		while True:
-			for event in pygame.event.get():
-				if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
-					pygame.quit()
-					sys.exit()
-				if event.type == KEYDOWN and (event.key == K_SPACE or event.key == K_UP):
-					if vertical > 0:
-						birdVelocityY = birdFlapVelocity
-						birdFlapped = True
+			key = pygame.key.get_pressed()
+			if key[pygame.K_UP] or key[pygame.K_DOWN]:
+				
+				if vertical > 0:
+					birdVelocityY = birdFlapVelocity
+					birdFlapped = True
 
 			gameOver = self.isGameOver(self.gameImages, elevation, horizontal, vertical, upPipes, downPipes)
 			if gameOver:
@@ -157,6 +161,7 @@ class Game(object):
 
 			pygame.display.update()
 			globals.clock.tick(self.fps)
+			pygame.event.pump()
 
 
 	def isGameOver(self, gameImages, elevation, horizontal, vertical, upPipes, downPipes):

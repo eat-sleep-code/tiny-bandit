@@ -1,10 +1,12 @@
-import globals
-import jmespath
 import json
 import os
-import pygame
 import random
+
+import jmespath
+import pygame
 import RPi.GPIO as GPIO
+
+import globals
 
 # File paths
 gameTheme = 'classic'
@@ -34,7 +36,11 @@ wildFreePlays = 3
 
 class Game(object):
 	def __init__(self):
-		self.font = pygame.font.Font('freesansbold.ttf', 32)
+
+		self.font = globals.fontScore
+
+		pygame.display.set_caption('Slots')
+		pygame.display.set_icon(pygame.image.load(os.path.join(imageRoot, 'icon.png')).convert_alpha())
 
 		self.mask = pygame.image.load(os.path.join(imageRoot, 'mask.png')).convert_alpha()
 
@@ -62,6 +68,7 @@ class Game(object):
 
 		
 	def playSlots(self):
+		global currentFreePlays
 		buttonState = GPIO.input(10)
 		if buttonState == GPIO.HIGH:
 			self.reel01Y = random.choice(reelSequence)		
@@ -70,8 +77,10 @@ class Game(object):
 			self.spin()
 			
 		key = pygame.key.get_pressed()
-		if key[pygame.K_UP] or key[pygame.K_DOWN]:
-			print('Key pressed...')
+		if globals.gameJustLaunched or key[pygame.K_UP] or key[pygame.K_DOWN]:
+			if globals.gameJustLaunched == True:
+				currentFreePlays = currentFreePlays + 1
+				globals.gameJustLaunched = False
 			self.reel01Y = random.choice(reelSequence)		
 			self.reel02Y = random.choice(reelSequence)	
 			self.reel03Y = random.choice(reelSequence)	

@@ -1,12 +1,13 @@
-import globals
-import os
-import pygame
-import RPi.GPIO as GPIO
 import sys
 import threading
-import time
-import slots 
-import flappy
+
+import pygame
+import RPi.GPIO as GPIO
+
+import globals
+from flappy.game import Game as Flappy
+from menu import CreateMenu
+from slots.game import Game as Slots
 
 # Run without Desktop
 # os.putenv('SDL_VIDEODRIVER', 'fbcon')
@@ -26,76 +27,60 @@ GPIO.setup(27, GPIO.OUT) #LED
 
 #--------------------------------------------------------------------------
 
+
 def buttonHandler():
 	while True:
-		#print('Buttons: ', len(globals.buttonCollection))
 		for event in pygame.event.get():
 			if event.type == pygame.MOUSEBUTTONDOWN:
 				for button in globals.buttonCollection:
 					rect = button.rect
 					if rect.collidepoint(event.pos):
-						if button.type == 'schedule' and button.active == True:
-							globals.gameInProgress = True
-							globals.gameSelected = True
-							globals.gameLink = button.value
+						globals.gameJustLaunched = True
+						globals.gameInProgress = True
+						globals.gameSelected = button.value
 				
 #--------------------------------------------------------------------------
+
 
 def startup():
 
 	try:
 		globals.initialize()
-			
-		if globals.splashDisplayed == False:
-			#imageUtils.emptyCache()
-			#showSplash = ShowSplash()
-			#globals.splashDisplayed = True
-			time.sleep(5)
-
+		
 		buttonHandlerThread = threading.Thread(target=buttonHandler)
 		buttonHandlerThread.start()
-		while True:
-			if globals.gameSelected != 'none' and globals.gameInProgress == True:
-				#showGame = ViewGame()
+
+		globals.clock.tick(60)
+		
+		running = True
+		while running:
+			for event in pygame.event.get():
+				if event.type == pygame.QUIT:
+					globals.gameSelected == 'none'
+					globals.gameInProgress == False
+					globals.gameJustLaunched == False
+					running = False
+					pygame.display.quit()
+					pygame.quit()
+					sys.exit()
+
+
+			if globals.gameSelected != 'none':
 				if globals.gameSelected == 'slots':		
-					slots.Game().playSlots()
+					Slots().playSlots()
 				elif globals.gameSelected == 'flappy':
-					flappy.Game().playFlappy()
+					Flappy().playFlappy()
 			else:
-				menu = CreateMenu()
+				pygame.display.set_caption(globals.title)
+				pygame.display.set_icon(pygame.image.load(globals.iconDefault))
+				CreateMenu()
+				
 		
 	except KeyboardInterrupt:
 		sys.exit(1)
 		
+
 #--------------------------------------------------------------------------
 
+
 startup()
-
-# Game Initialization
-#screenX = 480 
-# screenY = 800
-
-
-#pygame.display.set_caption('Tiny Bandit')
-#pygame.display.set_icon(pygame.image.load(os.path.join(appRoot, 'images/icon.png')))
-#
-#screen = pygame.display.set_mode((screenX, screenY))
-
-#currentGame = 'none'
-#running = True
-#clock.tick(60)
-
-#def playGame(requestedGame):
-#	global currentGame
-#	currentGame = requestedGame
-#	print('Launching ' + currentGame + '...')
-#	pass
-
-#while running:
-#	event = pygame.event.poll()
-#	for event in pygame.event.get():
-#		if event.type == pygame.QUIT:
-#			currentGame = 'none'
-#			running = False
-
-	
