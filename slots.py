@@ -35,22 +35,22 @@ class Game(object):
 	def __init__(self):
 		self.font = pygame.font.Font('freesansbold.ttf', 32)
 
-		self.mask = pygame.image.load(os.path.join(imageRoot, 'mask.png'))
+		self.mask = pygame.image.load(os.path.join(imageRoot, 'mask.png')).convert_alpha()
 
-		self.reel01 = pygame.image.load(os.path.join(imageRoot, 'reel-01.jpg'))
-		self.reel01Spinning = pygame.image.load(os.path.join(imageRoot, 'reel-01-spinning.jpg'))
+		self.reel01 = pygame.image.load(os.path.join(imageRoot, 'reel-01.jpg')).convert_alpha()
+		self.reel01Spinning = pygame.image.load(os.path.join(imageRoot, 'reel-01-spinning.jpg')).convert_alpha()
 		self.reel01Y = reelOffsetY
 
-		self.reel02 = pygame.image.load(os.path.join(imageRoot, 'reel-02.jpg'))
-		self.reel02Spinning = pygame.image.load(os.path.join(imageRoot, 'reel-01-spinning.jpg'))
+		self.reel02 = pygame.image.load(os.path.join(imageRoot, 'reel-02.jpg')).convert_alpha()
+		self.reel02Spinning = pygame.image.load(os.path.join(imageRoot, 'reel-01-spinning.jpg')).convert_alpha()
 		self.reel02Y = reelOffsetY
 
-		self.reel03 = pygame.image.load(os.path.join(imageRoot, 'reel-03.jpg'))
-		self.reel03Spinning = pygame.image.load(os.path.join(imageRoot, 'reel-03-spinning.jpg'))
+		self.reel03 = pygame.image.load(os.path.join(imageRoot, 'reel-03.jpg')).convert_alpha()
+		self.reel03Spinning = pygame.image.load(os.path.join(imageRoot, 'reel-03-spinning.jpg')).convert_alpha()
 		self.reel03Y = reelOffsetY
 
-		self.winningsJackpot = pygame.image.load(os.path.join(imageRoot, 'jackpot.png'))
-		self.winningsWild = pygame.image.load(os.path.join(imageRoot, 'wild.png'))
+		self.winningsJackpot = pygame.image.load(os.path.join(imageRoot, 'jackpot.png')).convert_alpha()
+		self.winningsWild = pygame.image.load(os.path.join(imageRoot, 'wild.png')).convert_alpha()
 
 		self.audioSpinning = pygame.mixer.Sound(os.path.join(audioRoot, 'spinning.wav'))
 		self.audioPoints = pygame.mixer.Sound(os.path.join(audioRoot, 'points.wav'))

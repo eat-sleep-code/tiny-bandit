@@ -4,6 +4,7 @@ import random
 import sys
 from pygame.locals import *
 
+
 # File paths
 appRoot = os.getcwd() + '/flappy/'
 imageRoot = appRoot + 'images/' 
