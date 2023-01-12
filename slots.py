@@ -69,7 +69,7 @@ class Game(object):
 			self.spin(screen, screenX, screenY)
 			
 		key = pygame.key.get_pressed()
-		if key[pygame.K_DOWN]:
+		if key[pygame.K_UP] or key[pygame.K_DOWN]:
 			print('Key pressed...')
 			self.reel01Y = random.choice(reelSequence)		
 			self.reel02Y = random.choice(reelSequence)	

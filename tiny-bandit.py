@@ -2,6 +2,7 @@ import os
 import pygame
 import RPi.GPIO as GPIO
 import slots 
+import flappy
 
 # GPIO setup
 GPIO.setmode(GPIO.BCM)
@@ -30,5 +31,5 @@ while running:
 		if event.type == pygame.QUIT:
 			running = False
 
-		slots.Game().playSlots(screen, screenX, screenY, clock)
-		
+		#slots.Game().playSlots(screen, screenX, screenY, clock)
+		flappy.Game().playFlappy(screen, screenX, screenY, clock)

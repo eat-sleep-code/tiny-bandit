@@ -10,7 +10,7 @@ sudo apt update
 echo ''
 echo -e '\033[93mInstalling prerequisites... \033[0m'
 sudo apt install -y git python3 python3-pip 
-sudo pip3 install jmespath Rpi.GPIO
+sudo pip3 install pygame jmespath Rpi.GPIO
 
 echo ''
 echo -e '\033[93mInstalling Game Software... \033[0m'
