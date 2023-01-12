@@ -13,7 +13,7 @@ The initial games that will be included are Slots and FlappyBird.<sup>[1](#footn
 Interested in adding your own simple game to this project?   If so, here are a few guidelines.
 
 - Your game must be written in Python 3 and utilize the current PyGame library
-- Your game must run in a self-contained folder
+- Your game must run in a self-contained sub folder
 - Your game must expose a base class called `Game`
 - Your game must expect no more than two external button inputs
 
