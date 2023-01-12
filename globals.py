@@ -20,7 +20,7 @@ def initialize():
 	displaySurface = pygame.display.set_mode((screenWidth, screenHeight), pygame.HWSURFACE | pygame.DOUBLEBUF)
 
 	global fontDefault
-	fontDefault = pygame.font.SysFont('Helvetica', 16, bold=False)
+	fontDefault = pygame.font.SysFont('Helvetica', 20, bold=False)
 
 	global fontScore
 	fontScore = pygame.font.SysFont('Helvetica', 32, bold=False)

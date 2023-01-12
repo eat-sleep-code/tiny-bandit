@@ -41,8 +41,9 @@ Add the following line to the end of the file and then save the file:
 - [X] Add jackpot image 
 - [X] Add wild image 
 - [X] Add actual mask
-- [ ] Add splash screen / menu
+- [X] Add splash screen / menu
 - [X] Write install script
+- [ ] Add Sounds for FlappyBird
 - [ ] Build physical Tiny Bandit machine and document the process
 - [ ] Add web service integration to allow date-specific promotions and possible Leaderboard
 

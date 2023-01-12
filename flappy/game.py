@@ -15,7 +15,7 @@ audioRoot = appRoot + 'audio/'
 
 class Game(object):
 	def __init__(self):
-		pygame.display.set_caption('Flappy Bird')
+		pygame.display.set_caption('FlappyBird')
 		pygame.display.set_icon(pygame.image.load(os.path.join(imageRoot, 'icon.png')).convert_alpha())
 
 		self.fps = 32
@@ -33,11 +33,12 @@ class Game(object):
 			pygame.image.load(os.path.join(imageRoot, '8.png')).convert_alpha(),
 			pygame.image.load(os.path.join(imageRoot, '9.png')).convert_alpha()
 		)
+		self.gameImages['splash'] = pygame.image.load(os.path.join(imageRoot, 'splash.png')).convert_alpha()
 		self.gameImages['bird'] = pygame.image.load(os.path.join(imageRoot, 'bird.png')).convert_alpha()
 		self.gameImages['base'] = pygame.image.load(os.path.join(imageRoot, 'base.png')).convert_alpha()
 		self.gameImages['background'] = pygame.image.load(os.path.join(imageRoot, 'background.jpg')).convert_alpha()
 		self.gameImages['pipe'] = pygame.image.load(os.path.join(imageRoot, 'pipe-upper.png')).convert_alpha(), pygame.image.load(os.path.join(imageRoot, 'pipe-lower.png')).convert_alpha()
-
+		self.gameImages['gameOver'] = pygame.image.load(os.path.join(imageRoot, 'game-over.png')).convert_alpha()
 
 
 	def playFlappy(self):
@@ -102,6 +103,9 @@ class Game(object):
 
 			gameOver = self.isGameOver(self.gameImages, elevation, horizontal, vertical, upPipes, downPipes)
 			if gameOver:
+				globals.displaySurface.blit(self.gameImages['gameOver'], (0, 0))
+				pygame.display.update()
+				pygame.time.delay(4000)
 				return
 
 			# Check current score...

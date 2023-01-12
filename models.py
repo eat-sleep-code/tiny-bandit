@@ -4,6 +4,7 @@ class Button(object):
 		self.text = ''
 		self.type = ''
 		self.value = ''
+		self.icon = ''
 
 
 # ---------------------------------------------------------------------
