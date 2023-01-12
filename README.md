@@ -1,8 +1,21 @@
 # Tiny Bandit
 
-Inspired by my prior [Tiny TV](https://github.com/eat-sleep-code/tiny-tv) project, we are back with Tiny Bandit.  Tiny Bandit is a miniaturized version of a casino gaming machine that can support multiple simple games.  
+![Tiny Bandit logo](images/icon-128.png)
 
-The initial games under development are Slots and FlappyBird.<sup>[1](#footnote01)</sup>     
+Inspired by the prior [Tiny TV](https://github.com/eat-sleep-code/tiny-tv) project, we are back with Tiny Bandit.  Tiny Bandit is a miniaturized version of a casino gaming machine that can support multiple simple games.  
+
+The initial games that will be included are Slots and FlappyBird.<sup>[1](#footnote01)</sup>     
+
+---
+
+## Game Development
+
+Interested in adding your own simple game to this project?   If so, here are a few guidelines.
+
+- Your game must be written in Python 3 and utilize the current PyGame library
+- Your game must run in a self-contained folder
+- Your game must expose a base class called `Game`
+- Your game must expect no more than two external button inputs
 
 ---
 
