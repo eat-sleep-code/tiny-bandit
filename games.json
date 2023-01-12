@@ -7,7 +7,7 @@
         },
         {
             "id": "flappy", 
-            "title": "Flappy Bird",
+            "title": "FlappyBird",
             "icon": "flappy/images/icon.png"
         }
     ]
