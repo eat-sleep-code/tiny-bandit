@@ -43,7 +43,7 @@ Add the following line to the end of the file and then save the file:
 - [X] Add actual mask
 - [X] Add splash screen / menu
 - [X] Write install script
-- [ ] Add Sounds for FlappyBird
+- [X] Add Sounds for FlappyBird
 - [ ] Build physical Tiny Bandit machine and document the process
 - [ ] Add web service integration to allow date-specific promotions and possible Leaderboard
 

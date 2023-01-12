@@ -40,6 +40,13 @@ class Game(object):
 		self.gameImages['pipe'] = pygame.image.load(os.path.join(imageRoot, 'pipe-upper.png')).convert_alpha(), pygame.image.load(os.path.join(imageRoot, 'pipe-lower.png')).convert_alpha()
 		self.gameImages['gameOver'] = pygame.image.load(os.path.join(imageRoot, 'game-over.png')).convert_alpha()
 
+		self.audioDie = pygame.mixer.Sound(os.path.join(audioRoot, 'die.wav'))
+		self.audioHit = pygame.mixer.Sound(os.path.join(audioRoot, 'hit.wav'))
+		self.audioPoint = pygame.mixer.Sound(os.path.join(audioRoot, 'point.wav'))
+		self.audioSwoosh = pygame.mixer.Sound(os.path.join(audioRoot, 'swoosh.wav'))
+		self.audioWing = pygame.mixer.Sound(os.path.join(audioRoot, 'wing.wav'))
+
+
 
 	def playFlappy(self):
 		horizontal = int(globals.screenWidth/5)
@@ -67,6 +74,8 @@ class Game(object):
 
 
 	def flap(self, horizontal, vertical, ground, elevation):
+		pygame.mixer.Sound.play(self.audioWing)
+
 		currentScore = 0
 		currentHeight = 100
 
@@ -98,11 +107,13 @@ class Game(object):
 			if key[pygame.K_UP] or key[pygame.K_DOWN]:
 				
 				if vertical > 0:
+					pygame.mixer.Sound.play(self.audioWing)
 					birdVelocityY = birdFlapVelocity
 					birdFlapped = True
 
 			gameOver = self.isGameOver(self.gameImages, elevation, horizontal, vertical, upPipes, downPipes)
 			if gameOver:
+				pygame.mixer.Sound.play(self.audioDie)
 				globals.displaySurface.blit(self.gameImages['gameOver'], (0, 0))
 				pygame.display.update()
 				pygame.time.delay(4000)
@@ -114,12 +125,14 @@ class Game(object):
 				pipeMidPosition = pipe['x'] + self.gameImages['pipe'][0].get_width()/2
 				if pipeMidPosition <= playerMidPosition < pipeMidPosition + 4:
 					currentScore += 1
+					pygame.mixer.Sound.play(self.audioPoint)
 					print(f"Your current score is {currentScore}")
 
 			if birdVelocityY < birdVelocityYMax and not birdFlapped:
 				birdVelocityY += birdAcceleration
 
 			if birdFlapped:
+				pygame.mixer.Sound.play(self.audioSwoosh)
 				birdFlapped = False
 			playerHeight = self.gameImages['bird'].get_height()
 			vertical = vertical + min(birdVelocityY, elevation - vertical - playerHeight)
@@ -164,6 +177,8 @@ class Game(object):
 				offsetX += self.gameImages['scoreimages'][num].get_width()
 
 			pygame.display.update()
+			
+
 			globals.clock.tick(self.fps)
 			pygame.event.pump()
 
@@ -175,10 +190,13 @@ class Game(object):
 		for pipe in upPipes:
 			pipeHeight = gameImages['pipe'][0].get_height()
 			if (vertical < pipeHeight + pipe['y'] and abs(horizontal - pipe['x']) < gameImages['pipe'][0].get_width()):
+				pygame.mixer.Sound.play(self.audioHit)
 				return True
 
 		for pipe in downPipes:
+			
 			if (vertical + gameImages['bird'].get_height() > pipe['y']) and abs(horizontal - pipe['x']) < gameImages['pipe'][0].get_width():
+				pygame.mixer.Sound.play(self.audioHit)
 				return True
 		return False
 
