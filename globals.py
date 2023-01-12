@@ -18,7 +18,7 @@ def initialize():
 	screenHeight = 800
 
 	global displaySurface
-	displaySurface = pygame.display.set_mode((0,0), pygame.HWSURFACE | pygame.DOUBLEBUF)
+	displaySurface = pygame.display.set_mode((screenWidth, screenHeight), pygame.HWSURFACE | pygame.DOUBLEBUF)
 
 	#--------------------------------------------------------------------------
 		
