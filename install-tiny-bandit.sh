@@ -46,10 +46,5 @@ echo -e '\033[32mInstallation completed. \033[0m'
 echo ''
 sudo rm ~/install-tiny-bandit.sh
 
-echo -p "A system reboot is required to complete the display driver installation.   Would you like to reboot now?  (Y/N): " reboot_system
-if [[ $reboot_system = Y* ]]
-then
-    sudo reboot
-else
-    bash
-fi
+echo ''
+echo -e '\033[33mA system reboot is required to complete the display driver installation. \033[0m'
