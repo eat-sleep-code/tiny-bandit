@@ -113,6 +113,9 @@ class Game(object):
 
 			gameOver = self.isGameOver(self.gameImages, elevation, horizontal, vertical, upPipes, downPipes)
 			if gameOver:
+				pygame.time.delay(500)
+				pygame.mixer.Sound.stop(self.audioWing)
+				pygame.mixer.Sound.stop(self.audioSwoosh)
 				pygame.mixer.Sound.play(self.audioDie)
 				globals.displaySurface.blit(self.gameImages['gameOver'], (0, 0))
 				pygame.display.update()
@@ -125,6 +128,8 @@ class Game(object):
 				pipeMidPosition = pipe['x'] + self.gameImages['pipe'][0].get_width()/2
 				if pipeMidPosition <= playerMidPosition < pipeMidPosition + 4:
 					currentScore += 1
+					pygame.mixer.Sound.stop(self.audioWing)
+					pygame.mixer.Sound.stop(self.audioSwoosh)
 					pygame.mixer.Sound.play(self.audioPoint)
 					print(f"Your current score is {currentScore}")
 
