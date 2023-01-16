@@ -5,8 +5,11 @@ import pygame
 import RPi.GPIO as GPIO
 
 import globals
-from flappy.game import Game as Flappy
 from menu import CreateMenu
+
+from flappy.game import Game as Flappy
+from luckyDay.game import Game as LuckyDay
+from magic8.game import Game as Magic8
 from slots.game import Game as Slots
 
 # Run without Desktop
@@ -70,6 +73,11 @@ def startup():
 					Slots().playSlots()
 				elif globals.gameSelected == 'flappy':
 					Flappy().playFlappy()
+				elif globals.gameSelected == 'lucky-day':
+					LuckyDay().playLuckyDay()
+				elif globals.gameSelected == 'magic-8':
+					Magic8().playMagic8()
+				
 			else:
 				pygame.display.set_caption(globals.title)
 				pygame.display.set_icon(pygame.image.load(globals.iconDefault))

@@ -9,7 +9,7 @@ import RPi.GPIO as GPIO
 import globals
 
 # File paths
-appRoot = globals.appRoot + '/lucky-day/'
+appRoot = os.getcwd() + '/luckyDay/'
 imageRoot = appRoot + 'images/'
 audioRoot = appRoot + 'audio/'
 

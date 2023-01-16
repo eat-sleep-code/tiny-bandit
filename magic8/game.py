@@ -9,7 +9,7 @@ import RPi.GPIO as GPIO
 import globals
 
 # File paths
-appRoot = globals.appRoot + '/magic-8/'
+appRoot = os.getcwd() + '/magic8/'
 imageRoot = appRoot + 'images/'
 audioRoot = appRoot + 'audio/'
 
