@@ -34,6 +34,9 @@ def initialize():
 
 	global iconDefault 
 	iconDefault = os.path.join(appRoot, 'images/icon.png')
+
+	global audioAmbience
+	audioAmbience = pygame.mixer.Sound(os.path.join(appRoot, 'audio/ambience.wav'))
 	
 	global gameSelected
 	gameSelected = 'none'

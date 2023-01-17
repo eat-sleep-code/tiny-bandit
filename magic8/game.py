@@ -26,27 +26,42 @@ class Game(object):
 
 		self.mask = pygame.image.load(os.path.join(imageRoot, 'mask.png')).convert_alpha()
 
-		self.ball = pygame.image.load(os.path.join(imageRoot, 'ball.jpg')).convert_alpha()
-		self.ballShaking = pygame.image.load(os.path.join(imageRoot, 'ball-shaking.jpg')).convert_alpha()
+		self.ball = pygame.image.load(os.path.join(imageRoot, '8.png')).convert_alpha()
+		#self.ballShaking = pygame.image.load(os.path.join(imageRoot, 'magic-8-shaking.png')).convert_alpha()
 		self.ballX = 0
 
-		self.ballWindow = pygame.image.load(os.path.join(imageRoot, 'ball-window.jpg')).convert_alpha()
-		self.ballWindowShaking = pygame.image.load(os.path.join(imageRoot, 'ball-window-shaking.jpg')).convert_alpha()
-		self.ballWindowX = 0
+		self.die = pygame.image.load(os.path.join(imageRoot, 'die.png')).convert_alpha()
+		self.dieShaking = pygame.image.load(os.path.join(imageRoot, 'die-shaking.png')).convert_alpha()
+		#TODO: Position die
+		self.dieX = 0
+		self.dieY = 0
+
+		#self.fluid = pygame.image.load(os.path.join(imageRoot, 'fluid.png')).convert_alpha()
+		#self.fluidShaking = pygame.image.load(os.path.join(imageRoot, 'fluid-shaking.png')).convert_alpha()
+		#self.fluidX = 0
+
+		self.porthole = pygame.image.load(os.path.join(imageRoot, 'porthole.png')).convert_alpha()
+		self.portholeX = 0
 
 		self.audioShaking = pygame.mixer.Sound(os.path.join(audioRoot, 'shaking.wav'))
-		self.audioResults = pygame.mixer.Sound(os.path.join(audioRoot, 'results.wav'))
+		#self.audioResults = pygame.mixer.Sound(os.path.join(audioRoot, 'results.wav'))
 		
 		self.result = ''
 		
 	def playMagic8(self):
+		globals.displaySurface.fill((0, 0, 0))
+		if globals.gameJustLaunched == True: 
+			globals.displaySurface.blit(self.ball, (0, 0))
+			globals.displaySurface.blit(self.mask, (0, 0))
+			pygame.display.update()
+
 		buttonState = GPIO.input(10)
 		if buttonState == GPIO.HIGH:
 			self.spun = random.randint(1, 10)		
 			self.shake()
 			
 		key = pygame.key.get_pressed()
-		if globals.gameJustLaunched or key[pygame.K_UP] or key[pygame.K_DOWN]:
+		if key[pygame.K_UP] or key[pygame.K_DOWN]:
 			if globals.gameJustLaunched == True:
 				globals.gameJustLaunched = False
 			self.spun = random.randint(1, 10)		
@@ -61,21 +76,24 @@ class Game(object):
 		ballShakes = random.randrange(7, 15)
 		pygame.mixer.Sound.play(self.audioShaking, 10)
 		for i in range(0, ballShakes):
+			
+			globals.displaySurface.fill((0, 0, 0))
 			if i == ballShakes - 1:
-				globals.displaySurface.blit(self.ball, (0, 0))
-				globals.displaySurface.blit(self.ballWindow, (0, 0))
-				#globals.displaySurface.blit(self.side + self.result, (0, 0))
+				globals.displaySurface.blit(self.die, (0, 12))
+				#TODO: blit the text here
+				globals.displaySurface.blit(self.porthole, (0, 0))
+				globals.displaySurface.blit(self.mask, (0, 0))
 			else:
-				ballRandomX = random.randrange(1, 5) * 10
-				ballRandomY = random.randrange(1, 5) * 10
-				globals.displaySurface.blit(self.ballShaking, (ballRandomX, ballRandomY))
-				globals.displaySurface.blit(self.ballWindowShaking, (ballRandomX, ballRandomY))
-						
-			globals.displaySurface.blit(self.mask, (0,0))
+				dieRotation = random.randrange(1, 36) * 10
+				rotatedDie = pygame.transform.rotate(self.dieShaking, dieRotation)
+				rotatedDieRectangle = rotatedDie.get_rect(center = self.dieShaking.get_rect(center = (241,401)).center)
+				globals.displaySurface.blit(rotatedDie, rotatedDieRectangle)
+				globals.displaySurface.blit(self.porthole, (0, 0))
+				globals.displaySurface.blit(self.mask, (0,0))
+				
 			pygame.display.update()
 			
 		pygame.mixer.Sound.stop(self.audioShaking)	
-		pygame.mixer.Sound.play(self.audioResults)	
 		
 		#	for i in range(0, 20):
 		#		GPIO.output(27,GPIO.HIGH)

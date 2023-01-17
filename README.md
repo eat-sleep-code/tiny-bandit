@@ -57,10 +57,16 @@ Add the following line to the end of the file and then save the file:
 - [X] Add splash screen / menu
 - [X] Write install script
 - [X] Add Sounds for FlappyBird
+- [ ] Blit text for Magic 8 result
+- [ ] Blit helper text to tell user to click button?
+- [ ] Add icons and menu icons for Magic 8 and Lucky Day
+- [ ] Finish Lucky Day
 - [ ] Build physical Tiny Bandit machine and document the process
 - [ ] Add web service integration to allow date-specific promotions and possible Leaderboard
 
 ---
 ## Credits
 
-FlappyBird was originally created by [Dong Nguyen](https://dotgears.com).  The instance included in this repository uses unique code, but does repurpose some of the original game's imagery.
+- FlappyBird was originally created by [Dong Nguyen](https://dotgears.com).  The instance included in this repository uses unique code, but does repurpose some of the original game's imagery.
+
+- Magic 8 is inspired by [Mattel's Magic 8 Ball](https://shop.mattel.com/collections/family-party-games#filter.ss_filter_tags_subtype=Magic%208%20Ball). 

@@ -34,13 +34,15 @@ GPIO.setup(27, GPIO.OUT) #LED
 def buttonHandler():
 	while True:
 		for event in pygame.event.get():
-			if event.type == pygame.MOUSEBUTTONDOWN:
-				for button in globals.buttonCollection:
-					rect = button.rect
-					if rect.collidepoint(event.pos):
-						globals.gameJustLaunched = True
-						globals.gameInProgress = True
-						globals.gameSelected = button.value
+			if globals.gameInProgress == False:
+				if event.type == pygame.MOUSEBUTTONDOWN:
+					for button in globals.buttonCollection:
+						rect = button.rect
+						if rect.collidepoint(event.pos):
+							pygame.mixer.Sound.stop(globals.audioAmbience)
+							globals.gameJustLaunched = True
+							globals.gameInProgress = True
+							globals.gameSelected = button.value
 				
 #--------------------------------------------------------------------------
 
@@ -49,6 +51,7 @@ def startup():
 
 	try:
 		globals.initialize()
+		pygame.mixer.Sound.play(globals.audioAmbience, 5)
 		
 		buttonHandlerThread = threading.Thread(target=buttonHandler)
 		buttonHandlerThread.start()
