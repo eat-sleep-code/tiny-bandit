@@ -57,11 +57,12 @@ Add the following line to the end of the file and then save the file:
 - [X] Add splash screen / menu
 - [X] Write install script
 - [X] Add Sounds for FlappyBird
-- [ ] Blit text for Magic 8 result
+- [X] Blit text for Magic 8 result
 - [ ] Blit helper text to tell user to click button?
-- [ ] Add icons and menu icons for Magic 8 and Lucky Day
+- [ ] Add icons and menu icons for Lucky Day
 - [ ] Finish Lucky Day
 - [ ] Build physical Tiny Bandit machine and document the process
+- [ ] Ensure buttons are correctly setup to trigger games as appropriate
 - [ ] Add web service integration to allow date-specific promotions and possible Leaderboard
 
 ---

@@ -170,7 +170,7 @@ class Game(object):
 	def checkWinnings(self, reel01, reel02, reel03):
 		
 		# Get the wild positions...
-		wild = jmespath.search("symbols[?name == 'wild'].positions | [0]", self.symbolMapping);
+		wild = jmespath.search("symbols[?name == 'wild'].positions | [0]", self.symbolMapping)
 		wildCount = 0
 		# Check each reel for a non-wild symbol, if exists adjust match expressions 
 		matchExpression01 = "(positions[0] >= `0`)"
