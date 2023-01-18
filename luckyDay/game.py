@@ -1,8 +1,6 @@
-import json
 import os
 import random
 
-import jmespath
 import pygame
 import RPi.GPIO as GPIO
 

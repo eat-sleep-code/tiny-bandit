@@ -1,4 +1,5 @@
 import os
+import sys
 
 import pygame
 
@@ -50,3 +51,6 @@ def initialize():
 	global buttonCollection
 	buttonCollection = []
 	
+
+def restart():
+	os.execv(sys.executable, ['python'] + sys.argv)
