@@ -48,31 +48,39 @@ class Game(object):
 		buttonState = GPIO.input(10)
 		if buttonState == GPIO.HIGH:
 			self.spun = random.randint(1, 10)		
-			self.spin()
+			self.bet()
 			
 		key = pygame.key.get_pressed()
 		if globals.gameJustLaunched or key[pygame.K_UP] or key[pygame.K_DOWN]:
 			if globals.gameJustLaunched == True:
 				globals.gameJustLaunched = False
 			self.spun = random.randint(1, 10)		
-			self.spin()	
-			
+			self.bet()	
+
+
+
+	def makeBet(self):
+		print('bet')
+		# TODO: blit bet bar
+		# TODO: blit bet selection
+		# TODO: blit bet text helpers
+		# TODO: write code to move blit bet selection when button pressed
+		# TODO: write code to capture blit bet selection
+		
+		self.spin()
+
 
 
 	def spin(self):
 		
 		# Spinning...
-		#if currentFreePlays > 0:
-		#	currentFreePlays = currentFreePlays - 1;
-		#else:
-		#	currentPayout = int(currentPayout) - (spinCost)
-
-		#currentFreePlaysText = self.font.render(str(currentFreePlays), True, (255, 255, 255))
-		#currentPayoutText = self.font.render(str(currentPayout), True, (255, 255, 255))
+		
 
 		wheelSpins = random.randrange(7, 15)
 		pygame.mixer.Sound.play(self.audioSpinning, 10)
 		for i in range(0, wheelSpins):
+			# TODO: spin wheel
+			# TODO: animate arrow
 			if i == wheelSpins - 1 and self.wheelRotation >= (self.spun * 36):
 				globals.displaySurface.blit(self.wheel, (0, 0))
 			else:
@@ -87,13 +95,8 @@ class Game(object):
 		
 		if (self.bet == self.spun):
 			
-			# Update the screen...
-			#currentFreePlaysText = self.font.render(str(currentFreePlays), True, (255, 255, 255))
-			#currentPayoutText = self.font.render(str(currentPayout), True, (255, 255, 255))
+			# Update the screen...		
 			globals.displaySurface.blit(self.mask, (0,0))
-			#globals.displaySurface.blit(currentFreePlaysText, (freePlaysX, freePlaysY))
-			#globals.displaySurface.blit(currentPayoutText, (payoutX, payoutY))
-			
 			globals.displaySurface.blit(self.win, (0,0))
 			pygame.mixer.Sound.play(self.audioPoints)
 			
@@ -103,3 +106,6 @@ class Game(object):
 				GPIO.output(27,GPIO.LOW)
 
 		pygame.display.update()
+		pygame.time.delay(5000)
+		self.bet = 0
+		self.makeBet()
