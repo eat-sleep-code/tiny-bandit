@@ -47,7 +47,7 @@ class Game(object):
 		self.spun = 0
 		
 	def playLuckyDay(self):
-		
+
 		buttonState = GPIO.input(10)
 		if buttonState == GPIO.HIGH:
 			self.spun = random.randint(1, 10)		
@@ -64,6 +64,8 @@ class Game(object):
 
 	def makeBet(self):
 		print('bet')
+		globals.displaySurface.fill((0, 0, 0))
+		globals.displaySurface.blit(self.betBar, (0, 0))
 		# TODO: blit bet bar
 		# TODO: blit bet selection
 		# TODO: blit bet text helpers
@@ -75,7 +77,8 @@ class Game(object):
 
 
 	def spin(self):
-		
+		globals.displaySurface.fill((0, 0, 0))
+
 		# Spinning...
 		
 
