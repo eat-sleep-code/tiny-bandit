@@ -28,6 +28,8 @@ class Game(object):
 
 		self.mask = pygame.image.load(os.path.join(imageRoot, 'mask.png')).convert_alpha()
 
+		self.betBar = pygame.image.load(os.path.join(imageRoot, 'bet-bar.jpg')).convert_alpha()
+		
 		self.arrow = pygame.image.load(os.path.join(imageRoot, 'arrow.jpg')).convert_alpha()
 		self.arrowSpinning = pygame.image.load(os.path.join(imageRoot, 'arrow-spinning.jpg')).convert_alpha()
 		self.arrowRotation = 0
@@ -45,6 +47,7 @@ class Game(object):
 		self.spun = 0
 		
 	def playLuckyDay(self):
+		
 		buttonState = GPIO.input(10)
 		if buttonState == GPIO.HIGH:
 			self.spun = random.randint(1, 10)		
