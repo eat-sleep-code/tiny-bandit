@@ -35,7 +35,7 @@ def buttonHandler():
 	while True:
 		for event in pygame.event.get():
 			if globals.gameInProgress == False:
-				if event.type == pygame.MOUSEBUTTONDOWN:
+				if event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.FINGERDOWN:
 					for button in globals.buttonCollection:
 						rect = button.rect
 						if rect.collidepoint(event.pos):
