@@ -1,0 +1,15 @@
+- (1) Rasperry Pi Zero 2W or Rapberry Pi Zero W
+- (1) iUniker 800x480 screen for Rasberry Pi Zero
+- (1) Adafruit 
+- (2) M2 x 4mm screws (for mounting amplifier board to bridge)
+- (4) M3 x 6mm screws (for mounting speakers to side panels)
+- (1) 3-pin WAGO connector
+- (2) 5-pin WAGO connectors
+- (1) Kework 0.3 Meter Micro USB Extension Cable, 90 Degree Right Angle to Micro USB Female Screw Mount Extender Cable
+- (2) 300mm nOOds Flexible LED Filaments (1 White, 1 Blue)
+- (2) Adafruit 16mm Illuminated Pusbutton - Blue Momentary
+- (1) Adafruit Stereo 2.1W Class D Audio Amplifer - TPA2012
+- (1) Sabrent USB External Sound Adapter
+- (2) Dayton Audio CE40P-8 1.5" Speakers
+- (1) StarTech.com 5in Right Angle Micro USB to USB OTG Host Adaper
+- (1) Right Angle Stereo 1/8" Wire
