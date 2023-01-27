@@ -29,8 +29,10 @@ sudo chown -R $USER:$USER MZDPI
 cd MZDPI/mzp354wv1b
 sudo chmod +x mzdpi-wvga-autoinstall
 sudo ./mzdpi-wvga-autoinstall
-
 cd ~
+sudo cp ~/tiny-bandit/mzp354wv1b.txt /boot/
+
+
 echo ''
 echo -e '\033[93mSetting up alias... \033[0m'
 sudo touch ~/.bash_aliases

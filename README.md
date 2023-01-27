@@ -34,6 +34,15 @@ sudo chmod +x ~/install-tiny-bandit.sh && ~/install-tiny-bandit.sh
 
 ---
 
+## Audio Settings
+
+If you are using a USB audio device you may need to edit the `/usr/share/alsa/alsa.conf` file for audio output to function properly.  Set the following values:
+
+```sh
+defaults.ctl.card 1
+defaults.pcm.card 1
+```
+---
 
 ## Autostart at Desktop Login
 
