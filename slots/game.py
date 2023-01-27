@@ -8,12 +8,6 @@ import pygame
 import globals
 import gpio
 
-# File paths
-gameTheme = 'classic'
-appRoot = globals.appRoot + 'slots/'
-imageRoot = appRoot + 'images/' + gameTheme
-audioRoot = appRoot + 'audio/' + gameTheme
-
 # Positioning
 reelOffsetX = 45
 reelOffsetY = 10
@@ -36,6 +30,10 @@ wildFreePlays = 3
 
 class Game(object):
 	def __init__(self):
+		gameTheme = 'classic'
+		appRoot = globals.appRoot + 'slots/'
+		imageRoot = appRoot + 'images/' + gameTheme
+		audioRoot = appRoot + 'audio/' + gameTheme
 
 		self.font = globals.fontScore
 

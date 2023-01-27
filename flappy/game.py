@@ -7,14 +7,14 @@ from pygame.locals import *
 import globals
 import gpio
 
-# File paths
-appRoot = globals.appRoot + 'flappy/'
-imageRoot = appRoot + 'images/' 
-audioRoot = appRoot + 'audio/'
 
 
 class Game(object):
 	def __init__(self):
+		appRoot = globals.appRoot + 'flappy/'
+		imageRoot = appRoot + 'images/' 
+		audioRoot = appRoot + 'audio/'
+
 		pygame.display.set_caption('FlappyBird')
 		pygame.display.set_icon(pygame.image.load(os.path.join(imageRoot, 'icon.png')).convert_alpha())
 

@@ -6,20 +6,13 @@ import RPi.GPIO as GPIO
 
 import globals
 
-# File paths
-appRoot = globals.appRoot + 'luckyDay/'
-imageRoot = appRoot + 'images/'
-audioRoot = appRoot + 'audio/'
-
-# Positioning
-
-
-# Scoring
-
 
 
 class Game(object):
 	def __init__(self):
+		appRoot = globals.appRoot + 'luckyDay/'
+		imageRoot = appRoot + 'images/'
+		audioRoot = appRoot + 'audio/'
 
 		self.font = globals.fontScore
 

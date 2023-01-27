@@ -7,16 +7,13 @@ import pygame
 import globals
 import gpio
 
-# File paths
-appRoot = globals.appRoot + 'magic8/'
-imageRoot = appRoot + 'images/'
-audioRoot = appRoot + 'audio/'
-
-# Positioning
 
 
 class Game(object):
 	def __init__(self):
+		appRoot = globals.appRoot + 'magic8/'
+		imageRoot = appRoot + 'images/'
+		audioRoot = appRoot + 'audio/'
 
 		self.font = pygame.font.SysFont('Helvetica', 12, bold=False)
 
