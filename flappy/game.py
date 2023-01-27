@@ -8,7 +8,7 @@ import globals
 import gpio
 
 # File paths
-appRoot = os.getcwd() + '/flappy/'
+appRoot = globals.appRoot + 'flappy/'
 imageRoot = appRoot + 'images/' 
 audioRoot = appRoot + 'audio/'
 

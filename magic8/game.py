@@ -8,7 +8,7 @@ import globals
 import gpio
 
 # File paths
-appRoot = os.getcwd() + '/magic8/'
+appRoot = globals.appRoot + 'magic8/'
 imageRoot = appRoot + 'images/'
 audioRoot = appRoot + 'audio/'
 

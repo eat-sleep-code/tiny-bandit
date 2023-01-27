@@ -24,6 +24,7 @@ sudo chmod +x tiny-bandit.py
 echo ''
 echo -e '\033[93mInstalling Display Drivers... \033[0m'
 cd ~
+sudo rm -Rf ~/MZDPI
 sudo git clone https://github.com/tianyoujian/MZDPI.git
 sudo chown -R $USER:$USER MZDPI
 cd MZDPI/mzp354wv1b

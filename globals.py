@@ -27,7 +27,7 @@ def initialize():
 	fontScore = pygame.font.SysFont('Helvetica', 32, bold=False)
 
 	global appRoot
-	appRoot = '/home/pi/tiny-bandit'
+	appRoot = '/home/pi/tiny-bandit/'
 	if os.path.exists(appRoot) == False:
 		appRoot = os.getcwd() + '/'
 	os.chdir(appRoot)

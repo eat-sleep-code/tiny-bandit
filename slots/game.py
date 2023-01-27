@@ -10,7 +10,7 @@ import gpio
 
 # File paths
 gameTheme = 'classic'
-appRoot = os.getcwd() + '/slots/'
+appRoot = globals.appRoot + 'slots/'
 imageRoot = appRoot + 'images/' + gameTheme
 audioRoot = appRoot + 'audio/' + gameTheme
 
