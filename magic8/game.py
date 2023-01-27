@@ -3,9 +3,9 @@ import os
 import random
 
 import pygame
-import RPi.GPIO as GPIO
 
 import globals
+import gpio
 
 # File paths
 appRoot = os.getcwd() + '/magic8/'
@@ -53,8 +53,7 @@ class Game(object):
 			globals.displaySurface.blit(self.mask, (0, 0))
 			pygame.display.update()
 
-		buttonState = GPIO.input(10)
-		if buttonState == GPIO.HIGH:
+		if gpio.isButtonPressed("left"):
 			self.spun = random.randint(1, 10)		
 			self.shake()
 			

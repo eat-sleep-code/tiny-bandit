@@ -4,8 +4,11 @@
 
 Inspired by the prior [Tiny TV](https://github.com/eat-sleep-code/tiny-tv) project, we are back with Tiny Bandit.  Tiny Bandit is a miniaturized version of a casino gaming machine that can support multiple simple games.  
 
-The initial games that will be included are Slots and FlappyBird.<sup>[1](#footnote01)</sup>     
+The initial games that will be included are:
 
+- Slots 
+- FlappyBird<sup> [1](#credit01)</sup> 
+- Magic 8<sup> [2](#credit02)</sup>    
 ---
 
 ## Game Development
@@ -15,7 +18,8 @@ Interested in adding your own simple game to this project?   If so, here are a f
 - Your game must be written in Python 3 and utilize the current PyGame library
 - Your game must run in a self-contained sub folder
 - Your game must expose a base class called `Game`
-- Your game must expect no more than two external button inputs
+- Your game must expect no more than two external button inputs (left and right) and/or touchscreen input
+- Your game must use the included `gpio.py` for GPIO interactions 
 
 ---
 
@@ -68,6 +72,6 @@ Add the following line to the end of the file and then save the file:
 ---
 ## Credits
 
-- FlappyBird was originally created by [Dong Nguyen](https://dotgears.com).  The instance included in this repository uses unique code, but does repurpose some of the original game's imagery.
+1. <span id="credit01">FlappyBird</a> was originally created by [Dong Nguyen](https://dotgears.com).  The instance included in this repository uses unique code, but does repurpose some of the original game's imagery.
 
-- Magic 8 is inspired by [Mattel's Magic 8 Ball](https://shop.mattel.com/collections/family-party-games#filter.ss_filter_tags_subtype=Magic%208%20Ball). 
+2.  <span id="credit02">Magic 8</span> is inspired by [Mattel's Magic 8 Ball](https://shop.mattel.com/collections/family-party-games#filter.ss_filter_tags_subtype=Magic%208%20Ball). 

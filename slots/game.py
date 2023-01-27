@@ -4,9 +4,9 @@ import random
 
 import jmespath
 import pygame
-import RPi.GPIO as GPIO
 
 import globals
+import gpio
 
 # File paths
 gameTheme = 'classic'
@@ -69,15 +69,8 @@ class Game(object):
 		
 	def playSlots(self):
 		global currentFreePlays
-		buttonState = GPIO.input(10)
-		if buttonState == GPIO.HIGH:
-			self.reel01Y = random.choice(reelSequence)		
-			self.reel02Y = random.choice(reelSequence)	
-			self.reel03Y = random.choice(reelSequence)	
-			self.spin()
-			
 		key = pygame.key.get_pressed()
-		if globals.gameJustLaunched or key[pygame.K_UP] or key[pygame.K_DOWN]:
+		if globals.gameJustLaunched or key[pygame.K_UP] or key[pygame.K_DOWN] or gpio.isButtonPressed("left"):
 			if globals.gameJustLaunched == True:
 				currentFreePlays = currentFreePlays + 1
 				globals.gameJustLaunched = False
@@ -158,10 +151,7 @@ class Game(object):
 
 			pygame.display.update()
 			
-			for i in range(0, 20):
-				GPIO.output(27,GPIO.HIGH)
-				pygame.time.delay(100)
-				GPIO.output(27,GPIO.LOW)
+			
 
 		pygame.display.update()
 

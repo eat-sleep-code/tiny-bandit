@@ -11,11 +11,6 @@
             "icon": "flappy/images/icon.png"
         },
         {
-            "id": "lucky-day", 
-            "title": "Lucky Day",
-            "icon": "luckyDay/images/icon.png"
-        },
-        {
             "id": "magic-8", 
             "title": "Magic 8",
             "icon": "magic8/images/icon.png"

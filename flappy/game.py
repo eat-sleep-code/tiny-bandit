@@ -1,11 +1,11 @@
 import os
 import random
-import sys
 
 import pygame
 from pygame.locals import *
 
 import globals
+import gpio
 
 # File paths
 appRoot = os.getcwd() + '/flappy/'
@@ -58,7 +58,7 @@ class Game(object):
 			globals.gameJustLaunched = False
 
 		key = pygame.key.get_pressed()
-		if key[pygame.K_UP] or key[pygame.K_DOWN]:
+		if key[pygame.K_UP] or key[pygame.K_DOWN] or gpio.isButtonPressed("left"):
 			horizontal = int(globals.screenWidth/5)
 			vertical = int((globals.screenHeight - self.gameImages['bird'].get_height())/2)
 			ground = 0
@@ -104,7 +104,7 @@ class Game(object):
 
 		while True:
 			key = pygame.key.get_pressed()
-			if key[pygame.K_UP] or key[pygame.K_DOWN]:
+			if key[pygame.K_UP] or key[pygame.K_DOWN] or gpio.isButtonPressed("left"):
 				
 				if vertical > 0:
 					pygame.mixer.Sound.play(self.audioWing)

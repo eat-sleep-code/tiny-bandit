@@ -1,31 +1,18 @@
+import os
 import sys
 import threading
 
 import pygame
-import RPi.GPIO as GPIO
+
 
 import globals
+import gpio
 from menu import CreateMenu
 
 from flappy.game import Game as Flappy
 from luckyDay.game import Game as LuckyDay
 from magic8.game import Game as Magic8
 from slots.game import Game as Slots
-
-# Run without Desktop
-# os.putenv('SDL_VIDEODRIVER', 'fbcon')
-# os.putenv('SDL_FBDEV', '/dev/fb1')
-# os.putenv('SDL_MOUSEDRV', 'TSLIB')
-# os.putenv('SDL_MOUSEDEV', '/dev/input/touchscreen')
-
-#--------------------------------------------------------------------------
-
-
-# GPIO setup
-GPIO.setmode(GPIO.BCM)
-GPIO.setwarnings(False)
-GPIO.setup(10, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) #BUTTON
-GPIO.setup(27, GPIO.OUT) #LED
 
 
 #--------------------------------------------------------------------------
@@ -51,6 +38,7 @@ def startup():
 
 	try:
 		globals.initialize()
+		gpio.initialize()
 		pygame.mixer.Sound.play(globals.audioAmbience, 5)
 		
 		buttonHandlerThread = threading.Thread(target=buttonHandler)
@@ -88,6 +76,7 @@ def startup():
 				
 		
 	except KeyboardInterrupt:
+		gpio.cleanup()
 		sys.exit(1)
 		
 
