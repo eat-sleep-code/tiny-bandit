@@ -19,7 +19,7 @@ sudo rm -Rf ~/tiny-bandit
 sudo git clone -b main --single-branch https://github.com/eat-sleep-code/tiny-bandit
 sudo chown -R $USER:$USER tiny-bandit
 cd tiny-bandit
-sudo chmod +x tiny-bandit.py
+sudo chmod +x *.py
 
 echo ''
 echo -e '\033[93mInstalling Display Drivers... \033[0m'

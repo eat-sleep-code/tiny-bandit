@@ -1,4 +1,4 @@
-pio=0-9=a2
+gpio=0-9=a2
 gpio=12-17=a2
 gpio=20-25=a2
 gpio=18=op,dh,pd

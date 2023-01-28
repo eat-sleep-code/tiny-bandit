@@ -1,3 +1,5 @@
+import argparse
+import os
 import sys
 import threading
 
@@ -14,15 +16,32 @@ from magic8.game import Game as Magic8
 from slots.game import Game as Slots
 
 
-#--------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--noX', dest='noX', help='Set the command action', default=False)
+args = parser.parse_args()
+
+
+# -----------------------------------------------------------------------------
+
+
+if args.noX:
+	os.putenv('SDL_VIDEODRIVER', 'fbcon')
+	os.putenv('SDL_FBDEV', '/dev/fb1')
+	os.putenv('SDL_MOUSEDRV', 'TSLIB')
+	os.putenv('SDL_MOUSEDEV', '/dev/input/touchscreen')
+
+
+#------------------------------------------------------------------------------
 
 
 def buttonHandler():
 	while True:
 		for event in pygame.event.get():
 			if globals.gameInProgress == False:
-				key = pygame.key.get_pressed()
-
+				
 				if event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.FINGERDOWN:
 					for button in globals.buttonCollection:
 						rect = button.rect
@@ -31,12 +50,14 @@ def buttonHandler():
 							globals.gameJustLaunched = True
 							globals.gameInProgress = True
 							globals.gameSelected = button.value
-				
-				if key[pygame.K_q]:
-					gpio.cleanup()
-					sys.exit(1)
 
-#--------------------------------------------------------------------------
+		key = pygame.key.get_pressed()
+		if key[pygame.K_q]:
+			gpio.cleanup()
+			sys.exit(1)
+
+
+#------------------------------------------------------------------------------
 
 
 def startup():
