@@ -44,6 +44,21 @@ defaults.pcm.card 1
 ```
 ---
 
+## Autostart at Bash Login
+To autostart the program as soon as a Bash shell login occurs, execute the following command:
+
+```
+sudo nano .bashrc
+```
+
+Add the following line to the end of the file and then save the file:
+
+```
+sudo python3 ~/tiny-bandit/tiny-bandit.py --noX=True
+```
+
+---
+
 ## Autostart at Desktop Login
 
 To autostart the program as soon as the Raspberry Pi OS desktop starts, execute the following command:
