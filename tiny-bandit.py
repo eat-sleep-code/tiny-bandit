@@ -1,5 +1,6 @@
 import argparse
 import os
+import pdb
 import sys
 import threading
 
@@ -73,6 +74,10 @@ def startup():
 		globals.clock.tick(60)
 		
 		running = True
+		pygame.display.set_caption(globals.title)
+		pygame.display.set_icon(pygame.image.load(globals.iconDefault))
+		CreateMenu()
+				
 		while running:
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
@@ -95,10 +100,6 @@ def startup():
 				elif globals.gameSelected == 'magic-8':
 					Magic8().playMagic8()
 				
-			else:
-				pygame.display.set_caption(globals.title)
-				pygame.display.set_icon(pygame.image.load(globals.iconDefault))
-				CreateMenu()
 				
 		
 	except KeyboardInterrupt:

@@ -1,4 +1,5 @@
 import os
+import pdb
 import sys
 
 import pygame
@@ -8,6 +9,7 @@ def initialize():
 	pygame.init()
 	pygame.mixer.pre_init(16000, -16, 2, 1024)
 	pygame.mixer.init()
+	breakpoint()
 
 	global clock
 	clock = pygame.time.Clock()
