@@ -1,6 +1,5 @@
 import argparse
 import os
-import pdb
 import sys
 import threading
 
@@ -29,7 +28,7 @@ args = parser.parse_args()
 
 
 if args.noX:
-	os.putenv('SDL_VIDEODRIVER', 'rpi')
+	os.putenv('SDL_VIDEODRIVER', 'kmsdrm')
 	#os.putenv('SDL_FBDEV', '/dev/fb1')
 	#os.putenv('SDL_MOUSEDRV', 'TSLIB')
 	#os.putenv('SDL_MOUSEDEV', '/dev/input/touchscreen')
