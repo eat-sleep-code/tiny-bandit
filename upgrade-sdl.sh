@@ -1,10 +1,14 @@
 cd ~
 
-
 echo -e ''
 echo -e '\033[93mRemove prior user-initiated install attempts... \033[0m'
 sudo rm -Rf ~/SDL2-*
 sudo rm -Rf /usr/local/lib/libSDL2*
+
+
+echo -e '\033[93mSet linker location... \033[0m'
+export LD_LIBRARY_PATH="/usr/local/lib"
+echo $LD_LIBRARY_PATH
 
 
 echo -e ''
@@ -79,4 +83,3 @@ cd ~
 echo -e ''
 echo -e '\033[93mRemoving build dependencies... \033[0m'
 sudo apt -y remove libasound2-dev libudev-dev libdbus-1-dev libts-dev libpng-dev libjpeg-dev libfreetype6-dev libflac-dev libogg-dev libmpg123-dev libmodplug-dev
-
