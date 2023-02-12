@@ -80,6 +80,6 @@ sudo make install
 cd ~
 
 
-echo -e ''
-echo -e '\033[93mRemoving build dependencies... \033[0m'
-sudo apt -y remove libasound2-dev libudev-dev libdbus-1-dev libts-dev libpng-dev libjpeg-dev libfreetype6-dev libflac-dev libogg-dev libmpg123-dev libmodplug-dev
+#echo -e ''
+#echo -e '\033[93mRemoving build dependencies... \033[0m'
+#sudo apt -y remove libasound2-dev libudev-dev libdbus-1-dev libts-dev libpng-dev libjpeg-dev libfreetype6-dev libflac-dev libogg-dev libmpg123-dev libmodplug-dev
