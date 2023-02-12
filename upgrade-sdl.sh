@@ -69,10 +69,10 @@ cd ~
 
 echo -e ''
 echo -e '\033[93mInstalling SDL Mixer... \033[0m'
-wget https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-2.0.5.tar.gz
-tar zxf SDL2_mixer-2.0.5.tar.gz
-rm SDL2_mixer-2.0.5.tar.gz
-cd SDL2_mixer-2.0.5
+wget https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-2.0.4.tar.gz
+tar zxf SDL2_mixer-2.0.4.tar.gz
+rm SDL2_mixer-2.0.4.tar.gz
+cd SDL2_mixer-2.0.4
 ./autogen.sh
 ./configure --disable-music-midi --disable-music-opus
 make -j $(grep -c '^processor' /proc/cpuinfo 2>/dev/null)
